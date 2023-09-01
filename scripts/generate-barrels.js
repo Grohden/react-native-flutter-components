@@ -18,7 +18,7 @@ const scanAndGenerate = (targetFolder, depth = 0) => {
       rawNames.push(dirent.name);
     }
 
-    if (dirent.isDirectory() && depth <= 1) {
+    if (dirent.isDirectory() && depth <= 5) {
       rawNames.push(dirent.name);
       scanAndGenerate(path.join(targetFolder, dirent.name), depth + 1);
     }
@@ -37,6 +37,8 @@ const scanAndGenerate = (targetFolder, depth = 0) => {
   }
 };
 
-['components', 'styles', 'context'].forEach((target) => {
-  scanAndGenerate(path.join(base, target));
-});
+['components', 'styles', 'design-tokens', 'theme-data', 'context'].forEach(
+  (target) => {
+    scanAndGenerate(path.join(base, target));
+  },
+);
