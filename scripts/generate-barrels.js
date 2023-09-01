@@ -25,8 +25,8 @@ const scanAndGenerate = (targetFolder, depth = 0) => {
   });
 
   const imports = rawNames
-    .sort()
     .map((name) => name.replace(fileExtsReg, ''))
+    .sort((a, b) => a.localeCompare(b))
     .map((name) => `export * from './${name}';`);
 
   if (imports.length) {
