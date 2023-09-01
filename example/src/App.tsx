@@ -1,31 +1,34 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from '@grohden/react-native-flutter-components';
+import {
+  Border,
+  BoxDecoration,
+  Column,
+  CrossAxisAlignment,
+  DecoratedBox,
+  MainAxisAlignment,
+  MainAxisSize,
+  Scaffold,
+  Text,
+  typeScaleTokens,
+} from '@grohden/react-native-flutter-components';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <Scaffold>
+      <DecoratedBox
+        boxDecoration={BoxDecoration.new({
+          border: Border.debug(),
+        })}
+      >
+        <Column
+          mainAxisSize={MainAxisSize.max}
+          mainAxisAlignment={MainAxisAlignment.center}
+          crossAxisAlignment={CrossAxisAlignment.center}
+        >
+          <Text style={typeScaleTokens.displaySmall}>Hello World!</Text>
+        </Column>
+      </DecoratedBox>
+    </Scaffold>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
