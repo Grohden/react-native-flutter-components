@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@grohden/react-native-flutter-components": ["./src/index"]
+      "@grohden/react-native-flutter-components": ["./src/index"],
+      "@lib/*": ["./src/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
