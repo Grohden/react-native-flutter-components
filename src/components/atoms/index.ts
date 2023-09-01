@@ -2,3 +2,4 @@
 
 export * from './containers';
 export * from './flex';
+export * from './Text';
