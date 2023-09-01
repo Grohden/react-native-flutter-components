@@ -2,5 +2,6 @@
 
 export * from './containers';
 export * from './flex';
+export * from './placeholder';
 export * from './sized-box';
 export * from './text';

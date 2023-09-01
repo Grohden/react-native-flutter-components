@@ -1,4 +1,8 @@
 export class Size {
+  static new(width: number, height: number) {
+    return new Size(width, height);
+  }
+
   static fromHeight(height: number) {
     return new Size(Infinity, height);
   }
