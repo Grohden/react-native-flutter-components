@@ -34,7 +34,7 @@ const PaddingMeta: Meta<StoryProps> = {
 export default PaddingMeta;
 
 export const Basic: Story<StoryProps> = (arg) => {
-  let insets = PaddingControls.resolve(arg);
+  const insets = PaddingControls.resolve(arg);
 
   return (
     <Container

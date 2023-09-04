@@ -37,11 +37,6 @@ since in react & js things work differently.
 
 Just `yarn example ios` or `yarn example android`
 
-### Developing
-
-First, follow `Running` and then `yarn example storybook-watch`, then
-implement the stories.
-
 ### Implementable components
 
 Since React Native doesn't provide proper support for basic stuff like
