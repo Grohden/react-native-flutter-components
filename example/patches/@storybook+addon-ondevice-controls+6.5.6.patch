@@ -1,0 +1,72 @@
+diff --git a/node_modules/@storybook/addon-ondevice-controls/dist/ControlsPanel.js b/node_modules/@storybook/addon-ondevice-controls/dist/ControlsPanel.js
+index 872de66..ef53943 100644
+--- a/node_modules/@storybook/addon-ondevice-controls/dist/ControlsPanel.js
++++ b/node_modules/@storybook/addon-ondevice-controls/dist/ControlsPanel.js
+@@ -47,6 +47,26 @@ const ButtonText = react_native_theming_1.styled.Text(({ theme }) => ({
+     fontSize: theme.button.fontSize,
+     fontWeight: theme.button.fontWeight,
+ }));
++
++const processCondition = (argType, storyParameters, argsFromHook) => {
++    const condition = argType?.if;
++    const conditionTargetField = condition?.arg;
++
++    if(!conditionTargetField) {
++        return true
++    }
++
++    const key = storyParameters?.argTypes?.[conditionTargetField]?.name
++    const value = argsFromHook?.[key]
++
++    if ('eq' in condition) {
++        return condition.eq === value;
++    } if ('neq' in condition) {
++        return condition.neq !== value;
++    } else {
++        throw '!!!CUSTOM CODE!!!, NEED TO IMPLEMENT CONDITION'
++    }
++}
+ const ControlsPanel = ({ api }) => {
+     const store = api.store();
+     const storyId = store.getSelection()?.storyId;
+@@ -54,19 +74,24 @@ const ControlsPanel = ({ api }) => {
+     const [argsFromHook, updateArgs, resetArgs] = (0, hooks_1.useArgs)(storyId, store);
+     const { argsObject, argTypes, parameters } = react_1.default.useMemo(() => {
+         const { argTypes: storyArgTypes, parameters: storyParameters } = store.fromId(storyId);
++
+         const storyArgsObject = Object.entries(storyArgTypes).reduce((prev, [key, argType]) => {
+             const isControl = Boolean(argType?.control);
+-            return isControl
+-                ? {
++            const condition = processCondition(argType, storyParameters, argsFromHook)
++
++            if(isControl && condition) {
++                return {
+                     ...prev,
+-                    [key]: {
+-                        ...argType,
+-                        name: key,
+-                        type: argType?.control?.type,
+-                        value: argsFromHook[key],
++                      [key]: {
++                    ...argType,
++                          name: key,
++                          type: argType?.control?.type,
++                          value: argsFromHook[key],
+                     },
+                 }
+-                : prev;
++            }
++
++            return prev;
+         }, {});
+         return {
+             argTypes: storyArgTypes,
+@@ -74,6 +99,7 @@ const ControlsPanel = ({ api }) => {
+             argsObject: storyArgsObject,
+         };
+     }, [store, storyId, argsFromHook]);
++
+     const hasControls = Object.keys(argTypes).length > 0;
+     const isArgsStory = parameters.__isArgsStory;
+     const showWarning = !(hasControls && isArgsStory);
