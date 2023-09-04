@@ -48,6 +48,7 @@ try {
 const getStories = () => {
   return {
     "./.storybook/stories/padding/Padding.stories.tsx": require("./stories/padding/Padding.stories.tsx"),
+    "./.storybook/stories/sized-box/SizedBox.stories.tsx": require("./stories/sized-box/SizedBox.stories.tsx"),
   };
 };
 

@@ -16,6 +16,7 @@ export const PaddingControls = {
   controls: (): Meta<PaddingControlsType>['argTypes'] => ({
     paddingType: {
       label: 'Padding type',
+      defaultValue: 'All',
       type: {
         name: 'enum',
         value: ['All', 'Symmetric', 'Only'],
@@ -24,36 +25,43 @@ export const PaddingControls = {
     paddingAll: {
       label: 'Padding',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'All' },
     },
     paddingSymmetricVertical: {
       label: 'Padding Vertical',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Symmetric' },
     },
     paddingSymmetricHorizontal: {
       label: 'Padding Horizontal',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Symmetric' },
     },
     paddingOnlyTop: {
       label: 'Padding Top',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Only' },
     },
     paddingOnlyLeft: {
       label: 'Padding Left',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Only' },
     },
     paddingOnlyRight: {
       label: 'Padding Right',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Only' },
     },
     paddingOnlyBottom: {
       label: 'Padding Bottom',
       control: 'number',
+      defaultValue: 10,
       if: { arg: 'paddingType', eq: 'Only' },
     },
   }),
