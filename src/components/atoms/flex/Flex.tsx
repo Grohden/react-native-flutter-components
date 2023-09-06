@@ -33,7 +33,7 @@ export const Flex = ({
   direction,
   mainAxisSize = MainAxisSize.min,
   mainAxisAlignment = MainAxisAlignment.start,
-  crossAxisAlignment = CrossAxisAlignment.start,
+  crossAxisAlignment = CrossAxisAlignment.center,
   children,
 }: PropsWithChildren<{
   direction: Axis;
@@ -45,7 +45,7 @@ export const Flex = ({
 
   switch (mainAxisSize) {
     case MainAxisSize.max:
-      style[direction === Axis.horizontal ? 'width' : 'height'] = '100%';
+      style.flex = 1;
       break;
   }
 
