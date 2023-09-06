@@ -4,7 +4,7 @@ import type {
   BoxDecoration,
   EdgeInsets,
 } from '@lib/styles';
-import React from 'react';
+import React, { Children } from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
@@ -36,5 +36,5 @@ export const Container = ({
     overflow: clipsChildren ? 'hidden' : undefined,
   };
 
-  return <View style={style}>{children}</View>;
+  return <View style={style}>{Children.only(children)}</View>;
 };

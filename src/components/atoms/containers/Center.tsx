@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export const Center = (props: { children?: React.ReactChild | undefined }) => (
+export const Center = (props: { children?: React.ReactChild }) => (
   <View style={styles.center}>
     {Children.only(props.children)}
   </View>
