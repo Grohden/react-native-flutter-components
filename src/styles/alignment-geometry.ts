@@ -13,15 +13,15 @@ export abstract class AlignmentGeometry {
 export class AlignmentDirectional extends AlignmentGeometry {
   static bottomCenter = new AlignmentDirectional(CENTER, BOTTOM);
 
-  static bottomEnd = new AlignmentDirectional(START, BOTTOM);
+  static bottomEnd = new AlignmentDirectional(END, BOTTOM);
 
-  static bottomStart = new AlignmentDirectional(END, BOTTOM);
+  static bottomStart = new AlignmentDirectional(START, BOTTOM);
 
   static center = new AlignmentDirectional(CENTER, CENTER);
 
-  static centerEnd = new AlignmentDirectional(START, CENTER);
+  static centerEnd = new AlignmentDirectional(END, CENTER);
 
-  static centerStart = new AlignmentDirectional(END, CENTER);
+  static centerStart = new AlignmentDirectional(START, CENTER);
 
   static topCenter = new AlignmentDirectional(CENTER, TOP);
 
