@@ -1,17 +1,21 @@
 import { createComponentContext } from '@lib/context';
-import { Size } from '@lib/styles';
 import type { Color } from '@lib/styles';
 
 export type IconButtonTheme = {
   color: Color;
-  containerSize: Size;
+  containerSize: number;
   size: number;
+};
+
+export const IconButtonThemeDefaults = {
+  containerSize: 48,
+  size: 24,
 };
 
 export const {
   Provider: IconButtonThemeData,
   useComponentContext: useIconButtonTheme,
 } = createComponentContext({
-  containerSize: Size.square(48),
+  containerSize: 48,
   size: 24,
 });
