@@ -21,7 +21,21 @@ export class BoxConstraints {
     return new BoxConstraints(size.width, size.width, size.width, size.height);
   }
 
-  constructor(
+  static new(constraints: {
+    minWidth?: number;
+    maxWidth?: number;
+    minHeight?: number;
+    maxHeight?: number;
+  }) {
+    return new BoxConstraints(
+      constraints.minWidth,
+      constraints.maxWidth,
+      constraints.minHeight,
+      constraints.maxHeight,
+    );
+  }
+
+  private constructor(
     private readonly minWidth = 0,
     private readonly maxWidth = Infinity,
     private readonly minHeight = 0,

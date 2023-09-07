@@ -1,22 +1,10 @@
-import {
-  Center,
-  Column,
-  Container,
-  DecoratedBox,
-  Expanded,
-  Padding,
-  Row,
-} from '@lib/components';
-import {
-  CrossAxisAlignment,
-  MainAxisAlignment,
-  MainAxisSize,
-} from '@lib/styles';
+import { Center, Container, Padding, Row, SizedBox } from '@lib/components';
 import {
   AlignmentDirectional,
   BoxConstraints,
   BoxDecoration,
   EdgeInsets,
+  MainAxisSize,
   Size,
 } from '@lib/styles';
 import {
@@ -33,49 +21,54 @@ import React from 'react';
 export const TopAppBar = (props: {
   leadingAction?: ReactNode;
   children?: ReactNode;
-  centered?: boolean;
+  titleCentered?: boolean;
 }) => {
+  // FIXME: this is apparently inferred (probably based on actions)
+  const effectiveCentered = props.titleCentered ?? true;
   const { insets, container, icon, headline } = useTopAppBarTheme();
 
   let title = <TextTheme value={headline}>{props.children}</TextTheme>;
-  if (props.centered) {
-    title = <Center>{title}</Center>;
-  } else if (!props.leadingAction) {
+  if (props.leadingAction) {
     title = <Padding padding={EdgeInsets.only({ left: 16 })}>{title}</Padding>;
+  }
+  if (effectiveCentered) {
+    title = <Center>{title}</Center>;
   }
 
   const hasIcons = !!props.leadingAction;
 
   return (
-    <DecoratedBox boxDecoration={BoxDecoration.new({ color: container.color })}>
+    <Container
+      boxDecoration={BoxDecoration.new({ color: container.colorOnScroll })}
+    >
       <Padding padding={EdgeInsets.only({ top: insets.top })}>
         <Container
-          constraints={BoxConstraints.tight(Size.fromHeight(64))}
-          align={AlignmentDirectional.center}
+          constraints={BoxConstraints.expand({ height: 64 })}
+          align={AlignmentDirectional.centerStart}
         >
           <IconButtonThemeData value={icon}>
-            <Column
-              mainAxisSize={MainAxisSize.max}
-              mainAxisAlignment={MainAxisAlignment.center}
-            >
-              <Row
-                mainAxisSize={MainAxisSize.max}
-                crossAxisAlignment={CrossAxisAlignment.center}
-              >
-                {hasIcons && (
-                  <Container
-                    constraints={BoxConstraints.tight(Size.square(48))}
-                  >
-                    {props.leadingAction}
-                  </Container>
-                )}
-                <Expanded>{title}</Expanded>
-                {hasIcons && <Expanded />}
-              </Row>
-            </Column>
+            <Row mainAxisSize={MainAxisSize.max}>
+              {hasIcons && (
+                <SizedBox.fromSize size={Size.square(icon.containerSize)}>
+                  {props.leadingAction}
+                </SizedBox.fromSize>
+              )}
+              {title}
+              {
+                /*
+                 * FIXME: this is not a proper solution.. we need to figure out
+                 *  how to implement proper centering with the interference
+                 *  of side containers
+                 */
+              }
+              {hasIcons && (
+                <SizedBox.fromSize size={Size.square(icon.containerSize)}>
+                </SizedBox.fromSize>
+              )}
+            </Row>
           </IconButtonThemeData>
         </Container>
       </Padding>
-    </DecoratedBox>
+    </Container>
   );
 };

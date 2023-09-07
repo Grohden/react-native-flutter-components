@@ -6,7 +6,8 @@ import chroma from 'chroma-js';
 import React, { Children, useMemo } from 'react';
 import { Easing } from 'react-native';
 
-export const IconButton = ({ children, containerSize, size }: {
+export const IconButton = ({ children, containerSize, size, onPressed }: {
+  onPressed: () => void;
   children: React.ReactChild;
   containerSize?: number;
   size?: number;
@@ -31,13 +32,14 @@ export const IconButton = ({ children, containerSize, size }: {
     <DecoratedBox
       clipsChildren
       boxDecoration={BoxDecoration.new({
-        borderRadius: BorderRadius.circular(theme.containerSize),
+        borderRadius: BorderRadius.circular(effectiveContainerSize),
       })}
     >
       <InkWell
         duration={motionTokens.duration.long4}
         easing={easing}
         rippleColor={rippleColor}
+        onPress={onPressed}
       >
         <SizedBox
           width={effectiveContainerSize}

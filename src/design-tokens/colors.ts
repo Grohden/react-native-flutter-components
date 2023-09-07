@@ -2,6 +2,8 @@ import type { Color } from '@lib/styles';
 
 export type ColorTokens = {
   primary: Color;
+  primaryContainer: Color;
+  onPrimaryContainer: Color;
   surface: Color;
   surfaceContainer: Color;
   surfaceContainerHighest: Color;
@@ -13,6 +15,8 @@ export type ColorTokens = {
 
 export const lightColorTokens = {
   primary: '#6750A4',
+  primaryContainer: '#EADDFF',
+  onPrimaryContainer: '#21005E',
   surface: '#FEF7FF',
   surfaceContainer: '#F3EDF7',
   surfaceContainerHighest: '#E6E0E9',
