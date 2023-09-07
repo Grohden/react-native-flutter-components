@@ -2,16 +2,24 @@ import React, { Children } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export const Center = (props: { children?: React.ReactChild }) => (
-  <View style={styles.center}>
-    {Children.only(props.children)}
+  <View style={styles.centerRow}>
+    <View style={styles.centerCol}>
+      {Children.only(props.children)}
+    </View>
   </View>
 );
 
 const styles = StyleSheet.create({
-  center: {
+  centerRow: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignContent: 'center',
+    alignItems: 'center',
+  },
+  centerCol: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
