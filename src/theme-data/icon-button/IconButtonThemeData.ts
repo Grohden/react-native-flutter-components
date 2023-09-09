@@ -1,5 +1,6 @@
 import { createComponentContext } from '@lib/context';
-import type { Color } from '@lib/styles';
+
+import type { Color } from '@lib/std-ui';
 
 export type IconButtonTheme = {
   color: Color;

@@ -1,4 +1,4 @@
-import type { Color } from '@lib/styles';
+import type { Color } from '@lib/std-ui';
 
 export type ColorTokens = {
   primary: Color;

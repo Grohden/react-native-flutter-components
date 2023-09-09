@@ -1,8 +1,9 @@
 import { createComponentContext } from '@lib/context';
 import { lightColorTokens, typeScaleTokens } from '@lib/design-tokens';
-import type { Color } from '@lib/styles';
 import type { IconButtonTheme } from '../icon-button';
 import type { TextThemeData } from '../text';
+
+import type { Color } from '@lib/std-ui';
 
 export type TopAppBarThemeData = {
   insets: { top: number; bottom: number; left: number; right: number };

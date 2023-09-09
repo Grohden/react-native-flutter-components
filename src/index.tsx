@@ -1,8 +1,9 @@
-export * from './components';
 export * from './context';
-export * from './styles';
+export * from './material';
+export * from './painting';
+export * from './rendering';
+export * from './std-ui';
+export * from './widgets';
 
-// FIXME: this probably should be optional for lib consumers
-//  maybe we could pack it under /material for specific
-//  material stuff?
+// FIXME: use theme
 export * from './design-tokens';

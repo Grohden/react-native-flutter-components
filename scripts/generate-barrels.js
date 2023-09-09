@@ -37,7 +37,7 @@ const scanAndGenerate = (targetFolder, depth = 0) => {
   }
 };
 
-['components', 'styles', 'design-tokens', 'theme-data', 'context'].forEach(
+['std-ui', 'widgets', 'material', 'painting', 'rendering'].forEach(
   (target) => {
     scanAndGenerate(path.join(base, target));
   },

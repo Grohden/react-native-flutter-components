@@ -1,6 +1,7 @@
+import type { TextStyle } from 'react-native';
+
 import { createComponentContext } from '@lib/context';
 import { typeScaleTokens } from '@lib/design-tokens';
-import type { TextStyle } from 'react-native';
 
 export type TextThemeData = TextStyle;
 

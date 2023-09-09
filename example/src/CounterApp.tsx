@@ -5,7 +5,7 @@ import {
   Scaffold,
   Text,
   TopAppBar,
-} from '@lib/components';
+} from '@grohden/react-native-flutter-components';
 import { typeScaleTokens } from '@lib/design-tokens';
 import { TopAppBarDataDefaults, TopAppBarTheme } from '@lib/theme-data';
 import React, { useState } from 'react';
