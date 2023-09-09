@@ -6,6 +6,7 @@ export * from './border';
 export * from './box-constraints';
 export * from './box-decoration';
 export * from './box-shadow';
+export * from './brightness';
 export * from './color';
 export * from './cross-axis-alignment';
 export * from './edge-insets';
