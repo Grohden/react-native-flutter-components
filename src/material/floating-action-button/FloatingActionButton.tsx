@@ -1,11 +1,7 @@
 import React, { Children } from 'react';
 import { Easing } from 'react-native';
 
-import {
-  elevationTokens,
-  lightColorTokens,
-  motionTokens,
-} from '@lib/design-tokens';
+import { useTheme } from '@lib/material';
 import { InkWell } from '@lib/material/ink-well';
 import {
   BorderRadius,
@@ -30,14 +26,15 @@ export const FloatingActionButton = ({ children, onPressed }: {
   // shape: TODO: use proper shape,
   children: React.ReactChild;
 }) => {
-  const primary = lightColorTokens.primary;
-  const iconColor = lightColorTokens.onPrimaryContainer;
+  const { colorScheme } = useTheme();
+  const primary = colorScheme.primary;
+  const iconColor = colorScheme.onPrimaryContainer;
   const rippleColor = primary.withAlpha(0.5);
-  const easing = Easing.bezier(...motionTokens.easing.emphasized);
+  const easing = Easing.bezier(0.2, 0, 0, 1);
   const shadowDecoration = BoxDecoration.new({
     shadow: BoxShadow.elevated({
       color: Color('black'),
-      depth: elevationTokens.level3,
+      depth: 6,
     }),
   });
   const iconSize = 24;
@@ -51,12 +48,12 @@ export const FloatingActionButton = ({ children, onPressed }: {
         <DecoratedBox
           clipsChildren
           boxDecoration={BoxDecoration.new({
-            color: lightColorTokens.primaryContainer,
+            color: colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(16),
           })}
         >
           <InkWell
-            duration={motionTokens.duration.long4}
+            duration={600}
             easing={easing}
             rippleColor={rippleColor}
             onPress={onPressed}

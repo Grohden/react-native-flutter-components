@@ -1,11 +1,10 @@
 import React, { Children, useMemo } from 'react';
 import { Easing } from 'react-native';
 
-import { lightColorTokens, motionTokens } from '@lib/design-tokens';
+import { useTheme } from '@lib/material';
 import { Colors } from '@lib/material/colors';
 import { InkWell } from '@lib/material/ink-well';
 import { BorderRadius, BoxDecoration } from '@lib/painting';
-import { useIconButtonTheme } from '@lib/theme-data';
 import {
   Center,
   DecoratedBox,
@@ -20,19 +19,19 @@ export const IconButton = ({ children, containerSize, size, onPressed }: {
   containerSize?: number;
   size?: number;
 }) => {
-  const theme = useIconButtonTheme();
-  const { easing, iconColor, rippleColor } = useMemo(() => {
-    const primary = lightColorTokens.primary;
+  const { colorScheme } = useTheme();
+  const primary = colorScheme.primary;
 
+  const { easing, iconColor, rippleColor } = useMemo(() => {
     return {
-      easing: Easing.bezier(...motionTokens.easing.emphasized),
+      easing: Easing.bezier(0.2, 0, 0, 1),
       iconColor: primary.luminance() < 0.5 ? Colors.black : Colors.white,
       rippleColor: primary.withAlpha(0.5),
     };
-  }, []);
+  }, [primary]);
 
-  const effectiveSize = size ?? theme.size;
-  const effectiveContainerSize = containerSize ?? theme.containerSize;
+  const effectiveSize = size ?? 32;
+  const effectiveContainerSize = containerSize ?? 48;
 
   // FIXME: we prob need a theme for each token kind
   // FIXME: need to review ripple duration
@@ -44,7 +43,7 @@ export const IconButton = ({ children, containerSize, size, onPressed }: {
       })}
     >
       <InkWell
-        duration={motionTokens.duration.long4}
+        duration={600}
         easing={easing}
         rippleColor={rippleColor}
         onPress={onPressed}
