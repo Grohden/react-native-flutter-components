@@ -14,196 +14,196 @@ const sfUiText = undefined;
 
 export class Typography {
   static readonly blackMountainView = new TextTheme({
-    displayLarge: new TextStyle({
+    displayLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
     }),
-    displayMedium: new TextStyle({
+    displayMedium: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
     }),
-    displaySmall: new TextStyle({
+    displaySmall: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
     }),
-    headlineLarge: new TextStyle({
+    headlineLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
     }),
-    headlineMedium: new TextStyle({
+    headlineMedium: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
     }),
-    headlineSmall: new TextStyle({
+    headlineSmall: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black87,
     }),
-    titleLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
-    titleMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
-    titleSmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
-    bodyLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
-    bodyMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
-    bodySmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.black54 }),
-    labelLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
-    labelMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
-    labelSmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
+    titleLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
+    titleMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
+    titleSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
+    bodyLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
+    bodyMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
+    bodySmall: TextStyle({ fontFamily: 'Roboto', color: Colors.black54 }),
+    labelLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.black87 }),
+    labelMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
+    labelSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
   });
 
   static readonly whiteMountainView = new TextTheme({
-    displayLarge: new TextStyle({
+    displayLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
     }),
-    displayMedium: new TextStyle({
+    displayMedium: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
     }),
-    displaySmall: new TextStyle({
+    displaySmall: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
     }),
-    headlineLarge: new TextStyle({
+    headlineLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
     }),
-    headlineMedium: new TextStyle({
+    headlineMedium: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
     }),
-    headlineSmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    titleLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    titleMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    titleSmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    bodyLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    bodyMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    bodySmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.white70 }),
-    labelLarge: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    labelMedium: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
-    labelSmall: new TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    headlineSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    titleLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    titleMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    titleSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    bodyLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    bodyMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    bodySmall: TextStyle({ fontFamily: 'Roboto', color: Colors.white70 }),
+    labelLarge: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    labelMedium: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
+    labelSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
   });
 
   static readonly whiteCupertino = new TextTheme({
-    displayLarge: new TextStyle({
+    displayLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
     }),
-    displayMedium: new TextStyle({
+    displayMedium: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
     }),
-    displaySmall: new TextStyle({
+    displaySmall: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
     }),
-    headlineLarge: new TextStyle({
+    headlineLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
     }),
-    headlineMedium: new TextStyle({
+    headlineMedium: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
     }),
-    headlineSmall: new TextStyle({
+    headlineSmall: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white,
     }),
-    titleLarge: new TextStyle({ fontFamily: sfUiDisplay, color: Colors.white }),
-    titleMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    titleSmall: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    bodyLarge: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    bodyMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    bodySmall: new TextStyle({ fontFamily: sfUiText, color: Colors.white70 }),
-    labelLarge: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    labelMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
-    labelSmall: new TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    titleLarge: TextStyle({ fontFamily: sfUiDisplay, color: Colors.white }),
+    titleMedium: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    titleSmall: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    bodyLarge: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    bodyMedium: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    bodySmall: TextStyle({ fontFamily: sfUiText, color: Colors.white70 }),
+    labelLarge: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    labelMedium: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
+    labelSmall: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
   });
 
   static englishLike2021 = new TextTheme({
-    displayLarge: new TextStyle({
+    displayLarge: TextStyle({
       fontSize: 57.0,
       fontWeight: '400',
       letterSpacing: -0.25,
       height: 1.12,
     }),
-    displayMedium: new TextStyle({
+    displayMedium: TextStyle({
       fontSize: 45.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.16,
     }),
-    displaySmall: new TextStyle({
+    displaySmall: TextStyle({
       fontSize: 36.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.22,
     }),
-    headlineLarge: new TextStyle({
+    headlineLarge: TextStyle({
       fontSize: 32.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.25,
     }),
-    headlineMedium: new TextStyle({
+    headlineMedium: TextStyle({
       fontSize: 28.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.29,
     }),
-    headlineSmall: new TextStyle({
+    headlineSmall: TextStyle({
       fontSize: 24.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.33,
     }),
-    titleLarge: new TextStyle({
+    titleLarge: TextStyle({
       fontSize: 22.0,
       fontWeight: '400',
       letterSpacing: 0.0,
       height: 1.27,
     }),
-    titleMedium: new TextStyle({
+    titleMedium: TextStyle({
       fontSize: 16.0,
       fontWeight: '500',
       letterSpacing: 0.15,
       height: 1.50,
     }),
-    titleSmall: new TextStyle({
+    titleSmall: TextStyle({
       fontSize: 14.0,
       fontWeight: '500',
       letterSpacing: 0.1,
       height: 1.43,
     }),
-    labelLarge: new TextStyle({
+    labelLarge: TextStyle({
       fontSize: 14.0,
       fontWeight: '500',
       letterSpacing: 0.1,
       height: 1.43,
     }),
-    labelMedium: new TextStyle({
+    labelMedium: TextStyle({
       fontSize: 12.0,
       fontWeight: '500',
       letterSpacing: 0.5,
       height: 1.33,
     }),
-    labelSmall: new TextStyle({
+    labelSmall: TextStyle({
       fontSize: 11.0,
       fontWeight: '500',
       letterSpacing: 0.5,
       height: 1.45,
     }),
-    bodyLarge: new TextStyle({
+    bodyLarge: TextStyle({
       fontSize: 16.0,
       fontWeight: '400',
       letterSpacing: 0.5,
       height: 1.50,
     }),
-    bodyMedium: new TextStyle({
+    bodyMedium: TextStyle({
       fontSize: 14.0,
       fontWeight: '400',
       letterSpacing: 0.25,
       height: 1.43,
     }),
-    bodySmall: new TextStyle({
+    bodySmall: TextStyle({
       fontSize: 12.0,
       fontWeight: '400',
       letterSpacing: 0.4,
@@ -212,42 +212,42 @@ export class Typography {
   });
 
   static readonly blackCupertino = new TextTheme({
-    displayLarge: new TextStyle({
+    displayLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
     }),
-    displayMedium: new TextStyle({
+    displayMedium: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
     }),
-    displaySmall: new TextStyle({
+    displaySmall: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
     }),
-    headlineLarge: new TextStyle({
+    headlineLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
     }),
-    headlineMedium: new TextStyle({
+    headlineMedium: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
     }),
-    headlineSmall: new TextStyle({
+    headlineSmall: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black87,
     }),
-    titleLarge: new TextStyle({
+    titleLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black87,
     }),
-    titleMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
-    titleSmall: new TextStyle({ fontFamily: sfUiText, color: Colors.black }),
-    bodyLarge: new TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
-    bodyMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
-    bodySmall: new TextStyle({ fontFamily: sfUiText, color: Colors.black54 }),
-    labelLarge: new TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
-    labelMedium: new TextStyle({ fontFamily: sfUiText, color: Colors.black }),
-    labelSmall: new TextStyle({ fontFamily: sfUiText, color: Colors.black }),
+    titleMedium: TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
+    titleSmall: TextStyle({ fontFamily: sfUiText, color: Colors.black }),
+    bodyLarge: TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
+    bodyMedium: TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
+    bodySmall: TextStyle({ fontFamily: sfUiText, color: Colors.black54 }),
+    labelLarge: TextStyle({ fontFamily: sfUiText, color: Colors.black87 }),
+    labelMedium: TextStyle({ fontFamily: sfUiText, color: Colors.black }),
+    labelSmall: TextStyle({ fontFamily: sfUiText, color: Colors.black }),
   });
 
   static material2021(

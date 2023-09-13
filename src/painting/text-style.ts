@@ -4,9 +4,9 @@ import type { Color } from '@lib/std-ui';
 
 export type TextStyleProps = {
   color?: Color;
-  fontFamily?: string;
-  fontWeight?: RNTextStyle['fontWeight'];
+  fontFamily?: RNTextStyle['fontFamily'];
   fontSize?: RNTextStyle['fontSize'];
+  fontWeight?: RNTextStyle['fontWeight'];
   letterSpacing?: RNTextStyle['letterSpacing'];
   height?: RNTextStyle['lineHeight'];
   decoration?: RNTextStyle['textDecorationLine'];
@@ -14,29 +14,28 @@ export type TextStyleProps = {
   decorationStyle?: RNTextStyle['textDecorationStyle'];
 };
 
-export class TextStyle {
-  readonly color?: Color;
-  readonly fontFamily?: RNTextStyle['fontFamily'];
-  readonly fontSize?: RNTextStyle['fontSize'];
-  readonly fontWeight?: RNTextStyle['fontWeight'];
-  readonly letterSpacing?: RNTextStyle['letterSpacing'];
-  readonly height?: RNTextStyle['lineHeight'];
-  readonly decoration?: RNTextStyle['textDecorationLine'];
-  readonly decorationColor?: Color;
-  readonly decorationStyle?: RNTextStyle['textDecorationStyle'];
+export type TextStyle = TextStyleProps & {
+  apply: (props: {
+    fontFamily?: string;
+    color?: Color;
+    foreground?: Color;
+    decoration?: RNTextStyle['textDecorationLine'];
+    decorationColor?: Color;
+    decorationStyle?: RNTextStyle['textDecorationStyle'];
+    fontSizeFactor?: number;
+    fontSizeDelta?: number;
+    letterSpacingFactor?: number;
+    letterSpacingDelta?: number;
+    heightFactor?: number;
+    heightDelta?: number;
+  }) => TextStyle;
+  copyWith: (other: Partial<TextStyleProps>) => TextStyle;
+  toStyle: () => RNTextStyle;
+  merge: (other: TextStyle | undefined) => TextStyle;
+};
 
-  constructor(props: TextStyleProps) {
-    this.color = props.color;
-    this.fontFamily = props.fontFamily;
-    this.fontWeight = props.fontWeight;
-    this.letterSpacing = props.letterSpacing;
-    this.height = props.height;
-    this.decoration = props.decoration;
-    this.decorationColor = props.decorationColor;
-    this.decorationStyle = props.decorationStyle;
-    this.fontSize = props.fontSize;
-  }
-
+export const TextStyle = (props: TextStyleProps): TextStyle => ({
+  ...props,
   apply({
     fontFamily,
     color,
@@ -50,21 +49,8 @@ export class TextStyle {
     letterSpacingDelta = 0.0,
     heightFactor = 1.0,
     heightDelta = 0.0,
-  }: {
-    fontFamily?: string;
-    color?: Color;
-    foreground?: Color;
-    decoration?: RNTextStyle['textDecorationLine'];
-    decorationColor?: Color;
-    decorationStyle?: RNTextStyle['textDecorationStyle'];
-    fontSizeFactor?: number;
-    fontSizeDelta?: number;
-    letterSpacingFactor?: number;
-    letterSpacingDelta?: number;
-    heightFactor?: number;
-    heightDelta?: number;
   }) {
-    return new TextStyle({
+    return TextStyle({
       color: !foreground ? color || this.color : undefined,
       fontFamily: fontFamily || this.fontFamily,
       fontSize: !this.fontSize
@@ -83,10 +69,9 @@ export class TextStyle {
       decorationStyle: decorationStyle || this.decorationStyle,
       decorationColor: decorationColor || this.decorationColor,
     });
-  }
-
-  copyWith(other: Partial<TextStyleProps>) {
-    return new TextStyle({
+  },
+  copyWith(other) {
+    return TextStyle({
       color: other.color || this.color,
       fontFamily: other.fontFamily || this.fontFamily,
       fontWeight: other.fontWeight || this.fontWeight,
@@ -97,17 +82,15 @@ export class TextStyle {
       decorationColor: other.decorationColor || this.decorationColor,
       decorationStyle: other.decorationStyle || this.decorationStyle,
     });
-  }
-
-  merge(other: TextStyle | undefined) {
+  },
+  merge(other) {
     if (!other) {
       return this;
     }
 
     return this.copyWith(other);
-  }
-
-  toStyle(): RNTextStyle {
+  },
+  toStyle() {
     return {
       color: this.color?.hex(),
       fontFamily: this.fontFamily,
@@ -121,5 +104,5 @@ export class TextStyle {
       textDecorationColor: this.decorationColor?.hex(),
       textDecorationStyle: this.decorationStyle,
     };
-  }
-}
+  },
+});

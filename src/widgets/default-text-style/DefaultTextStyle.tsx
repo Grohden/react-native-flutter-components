@@ -7,7 +7,7 @@ export const {
   Provider: DefaultTextStyle,
   useComponentContext: useDefaultTextStyle,
 } = createComponentContext({
-  style: new TextStyle({
+  style: TextStyle({
     fontFamily: undefined,
     color: Color('black'),
   }),
