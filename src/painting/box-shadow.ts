@@ -18,7 +18,7 @@ export class BoxShadow {
     // Reminder: on iOS, shadow will only work
     //  on solid (?) backgrounds, luckily scaffold has a background
     return {
-      shadowColor: this.color,
+      shadowColor: this.color.hex(),
       shadowOffset: {
         width: 0,
         height: this.depth / 2,

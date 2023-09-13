@@ -5,4 +5,6 @@ export * from './axis';
 export * from './border';
 export * from './box-decoration';
 export * from './box-shadow';
+export * from './color-swatch';
 export * from './edge-insets';
+export * from './text-style';

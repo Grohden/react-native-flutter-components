@@ -2,13 +2,12 @@ import React, { useMemo, useState } from 'react';
 import { Animated, StyleSheet, View } from 'react-native';
 
 import { Border, BoxDecoration } from '@lib/painting';
-import type { Color } from '@lib/std-ui';
-import { Size } from '@lib/std-ui';
-import { DecoratedBox } from '@lib/widgets';
+import { Color, Size } from '@lib/std-ui';
+import { DecoratedBox } from '@lib/widgets/containers';
 
 export const Placeholder = (props: { color?: Color }) => {
   const [size, setSize] = useState(Size.square(0));
-  const effectiveColor = props.color || 'red';
+  const effectiveColor = props.color || Color('red');
   const decoration = BoxDecoration.new({
     border: Border.all({ color: effectiveColor, width: 1 }),
   });
@@ -30,13 +29,11 @@ export const Placeholder = (props: { color?: Color }) => {
 
     return (
       <Animated.View
-        style={{
-          position: 'absolute',
-          width: 1,
-          backgroundColor: effectiveColor,
+        style={[styles.absPosition, {
+          backgroundColor: effectiveColor.hex(),
           height: height,
           transform: transforms,
-        }}
+        }]}
       />
     );
   };
@@ -66,6 +63,10 @@ export const Placeholder = (props: { color?: Color }) => {
 };
 
 const styles = StyleSheet.create({
+  absPosition: {
+    position: 'absolute',
+    width: 1,
+  },
   expanded: {
     width: '100%',
     height: '100%',

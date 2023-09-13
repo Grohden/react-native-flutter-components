@@ -1,3 +1,4 @@
+import { Color } from '@lib/std-ui';
 import { BorderSide } from './border-side';
 import type { BorderSideArgs } from './border-side';
 
@@ -21,7 +22,7 @@ type BorderStyles =
 export class Border {
   constructor(private values: BorderDefinition) {}
 
-  static debug(color = 'red') {
+  static debug(color = Color('#FF0000FF')) {
     return Border.all({ color, width: 1 });
   }
 
@@ -46,16 +47,16 @@ export class Border {
 
   private toColorStyles(ref: BorderStyles) {
     if (this.values.top?.color) {
-      ref.borderTopColor = this.values.top.color;
+      ref.borderTopColor = this.values.top.color.hex();
     }
     if (this.values.bottom?.color) {
-      ref.borderBottomColor = this.values.bottom.color;
+      ref.borderBottomColor = this.values.bottom.color.hex();
     }
     if (this.values.left?.color) {
-      ref.borderLeftColor = this.values.left.color;
+      ref.borderLeftColor = this.values.left.color.hex();
     }
     if (this.values.right?.color) {
-      ref.borderRightColor = this.values.right.color;
+      ref.borderRightColor = this.values.right.color.hex();
     }
 
     return ref;

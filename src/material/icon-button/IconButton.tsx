@@ -1,12 +1,18 @@
-import chroma from 'chroma-js';
 import React, { Children, useMemo } from 'react';
 import { Easing } from 'react-native';
 
 import { lightColorTokens, motionTokens } from '@lib/design-tokens';
-import { InkWell } from '@lib/material';
+import { Colors } from '@lib/material/colors';
+import { InkWell } from '@lib/material/ink-well';
 import { BorderRadius, BoxDecoration } from '@lib/painting';
-import { IconThemeData, useIconButtonTheme } from '@lib/theme-data';
-import { Center, DecoratedBox, SizedBox } from '@lib/widgets';
+import { useIconButtonTheme } from '@lib/theme-data';
+import {
+  Center,
+  DecoratedBox,
+  IconTheme,
+  IconThemeData,
+  SizedBox,
+} from '@lib/widgets';
 
 export const IconButton = ({ children, containerSize, size, onPressed }: {
   onPressed: () => void;
@@ -16,12 +22,12 @@ export const IconButton = ({ children, containerSize, size, onPressed }: {
 }) => {
   const theme = useIconButtonTheme();
   const { easing, iconColor, rippleColor } = useMemo(() => {
-    const primary = chroma(lightColorTokens.primary);
+    const primary = lightColorTokens.primary;
 
     return {
       easing: Easing.bezier(...motionTokens.easing.emphasized),
-      iconColor: primary.luminance() < 0.5 ? 'black' : 'white',
-      rippleColor: primary.alpha(0.5).hex(),
+      iconColor: primary.luminance() < 0.5 ? Colors.black : Colors.white,
+      rippleColor: primary.withAlpha(0.5),
     };
   }, []);
 
@@ -48,14 +54,14 @@ export const IconButton = ({ children, containerSize, size, onPressed }: {
           height={effectiveContainerSize}
         >
           <Center>
-            <IconThemeData
-              value={{
+            <IconTheme
+              value={IconThemeData({
                 size: effectiveSize,
                 color: iconColor,
-              }}
+              })}
             >
               {Children.only(children)}
-            </IconThemeData>
+            </IconTheme>
           </Center>
         </SizedBox>
       </InkWell>

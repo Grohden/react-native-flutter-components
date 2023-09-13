@@ -1,13 +1,18 @@
-import { useTextTheme } from '@lib/theme-data';
-import type { TextThemeData } from '@lib/theme-data';
 import React from 'react';
 import { Text as RNText } from 'react-native';
+
+import { TextStyle } from '@lib/painting';
+import { useDefaultTextStyle } from '@lib/widgets/default-text-style';
 
 export const Text = ({
   style,
   children,
-}: React.PropsWithChildren<{ style?: Partial<TextThemeData> }>) => {
-  const effectiveStyle = { ...useTextTheme(), ...style };
+}: {
+  style?: TextStyle;
+  children: string | number;
+}) => {
+  const defaults = useDefaultTextStyle();
+  const effectiveStyle = defaults.style.merge(style).toStyle();
 
   return (
     <RNText style={effectiveStyle}>

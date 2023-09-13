@@ -3,13 +3,13 @@ import React, { Children } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export const Scaffold = (props: {
-  topAppBar?: ReactChild;
+  appBar?: ReactChild;
   floatingActionButton?: ReactChild;
   children: ReactChild;
 }) => {
   return (
     <View style={styles.container}>
-      {props.topAppBar && Children.only(props.topAppBar)}
+      {props.appBar && Children.only(props.appBar)}
       {Children.only(props.children)}
 
       {props.floatingActionButton && (
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // For shadows?
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   fab: {
     position: 'absolute',

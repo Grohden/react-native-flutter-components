@@ -28,7 +28,7 @@ And here's the list of widgets currently being implemented
 
 * Scaffold
 * InkWell (need to be reimplemented to be like flutter)
-* TopAppBar
+* AppBar
 
 I'm trying to follow strictly the flutter APIs, but DEVX is still considered
 since in react & js things work differently.

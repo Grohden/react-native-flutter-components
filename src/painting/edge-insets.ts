@@ -9,51 +9,47 @@ export type EdgeInsetsOnly = {
 
 export class EdgeInsets {
   private constructor(
-    public values: (EdgeInsetsSymmetric & EdgeInsetsOnly) | number,
+    public top: number | undefined,
+    public left: number | undefined,
+    public right: number | undefined,
+    public bottom: number | undefined,
   ) {}
 
-  static only(value: EdgeInsetsOnly) {
-    return new EdgeInsets(value);
+  static zero = new EdgeInsets(0, 0, 0, 0);
+
+  static only(values: EdgeInsetsOnly) {
+    return new EdgeInsets(values.top, values.left, values.right, values.bottom);
   }
 
   static symmetric(values: EdgeInsetsSymmetric) {
-    return new EdgeInsets(values);
+    return new EdgeInsets(
+      values.vertical,
+      values.horizontal,
+      values.horizontal,
+      values.vertical,
+    );
   }
 
   static all(value: number) {
-    return new EdgeInsets(value);
+    return new EdgeInsets(value, value, value, value);
   }
 
   toPrefixedStyles<K extends string>(prefix: K) {
-    type Keys =
-      | `${K}${Capitalize<keyof (EdgeInsetsSymmetric & EdgeInsetsOnly)>}`
-      | K;
+    type Keys = `${K}${Capitalize<keyof EdgeInsetsOnly>}`;
 
     const values: { [key in Keys]?: number } = {};
 
-    if (typeof this.values === 'number') {
-      values[prefix] = this.values;
-
-      return values;
+    if (this.top !== undefined) {
+      values[`${prefix}Top`] = this.top;
     }
-
-    if (this.values.horizontal !== undefined) {
-      values[`${prefix}Horizontal`] = this.values.horizontal;
+    if (this.left !== undefined) {
+      values[`${prefix}Left`] = this.left;
     }
-    if (this.values.vertical !== undefined) {
-      values[`${prefix}Vertical`] = this.values.vertical;
+    if (this.right !== undefined) {
+      values[`${prefix}Right`] = this.right;
     }
-    if (this.values.top !== undefined) {
-      values[`${prefix}Top`] = this.values.top;
-    }
-    if (this.values.bottom !== undefined) {
-      values[`${prefix}Bottom`] = this.values.bottom;
-    }
-    if (this.values.left !== undefined) {
-      values[`${prefix}Left`] = this.values.left;
-    }
-    if (this.values.right !== undefined) {
-      values[`${prefix}Right`] = this.values.right;
+    if (this.bottom !== undefined) {
+      values[`${prefix}Bottom`] = this.bottom;
     }
 
     return values;

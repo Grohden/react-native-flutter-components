@@ -1,5 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { useIconTheme } from '@lib/theme-data';
+import { useIconTheme } from '@lib/widgets';
 import React from 'react';
 
 export const Icon = (
@@ -15,7 +15,7 @@ export const Icon = (
     <MaterialIcons
       name={name}
       size={size ?? theme.size}
-      color={color ?? theme.color}
+      color={color ?? theme.color?.hex()}
     />
   );
 };

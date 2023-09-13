@@ -30,7 +30,7 @@ export class BoxDecoration {
 
   toStyles() {
     return {
-      backgroundColor: this.color,
+      backgroundColor: this.color?.hex(),
       ...this.border?.toStyle(),
       ...this.borderRadius?.toStyle(),
       ...this.shadow?.toStyle(),

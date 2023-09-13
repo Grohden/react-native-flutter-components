@@ -1,14 +1,9 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
 
-export enum ContextBehavior {
-  MERGE,
-  OVERRIDE,
-}
-
 export const createComponentContext = <T,>(
   initial: T,
-  behavior: ContextBehavior = ContextBehavior.OVERRIDE,
+  merger?: (oldValue: T, newValue: T) => T,
 ) => {
   const Context = createContext(initial);
 
@@ -19,16 +14,13 @@ export const createComponentContext = <T,>(
 
     let effectiveValue = props.value;
 
-    if (behavior === ContextBehavior.MERGE) {
+    if (merger) {
       // 'behavior' is a const defined in the upper closure,
       // this should not change between renders, so it's not a truly
       // conditional 'on render' hook call
       // eslint-disable-next-line react-hooks/rules-of-hooks
       effectiveValue = useMemo(
-        () => ({
-          ...parent,
-          ...props.value,
-        }),
+        () => (merger(parent, props.value)),
         [parent, props.value],
       );
     }

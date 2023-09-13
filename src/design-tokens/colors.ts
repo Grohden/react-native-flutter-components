@@ -1,4 +1,4 @@
-import type { Color } from '@lib/std-ui';
+import { Color } from '@lib/std-ui';
 
 export type ColorTokens = {
   primary: Color;
@@ -14,14 +14,14 @@ export type ColorTokens = {
 };
 
 export const lightColorTokens = {
-  primary: '#6750A4',
-  primaryContainer: '#EADDFF',
-  onPrimaryContainer: '#21005E',
-  surface: '#FEF7FF',
-  surfaceContainer: '#F3EDF7',
-  surfaceContainerHighest: '#E6E0E9',
-  onSurface: '#1C1B1F',
-  outline: '#79747E',
-  background: '#FEF7FF',
-  onBackground: '#1C1B1F',
+  primary: Color('#6750A4'),
+  primaryContainer: Color('#EADDFF'),
+  onPrimaryContainer: Color('#21005E'),
+  surface: Color('#FEF7FF'),
+  surfaceContainer: Color('#F3EDF7'),
+  surfaceContainerHighest: Color('#E6E0E9'),
+  onSurface: Color('#1C1B1F'),
+  outline: Color('#79747E'),
+  background: Color('#FEF7FF'),
+  onBackground: Color('#1C1B1F'),
 } satisfies ColorTokens;

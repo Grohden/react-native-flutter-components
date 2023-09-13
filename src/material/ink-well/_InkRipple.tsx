@@ -56,7 +56,7 @@ export const InkRipple = ({
         pointerEvents="none"
         style={{
           borderRadius: radius,
-          backgroundColor: color,
+          backgroundColor: color.hex(),
           width: radius * 2,
           height: radius * 2,
           opacity: opacity,

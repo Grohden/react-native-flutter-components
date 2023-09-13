@@ -1,4 +1,3 @@
-import chroma from 'chroma-js';
 import React, { Children } from 'react';
 import { Easing } from 'react-native';
 
@@ -7,16 +6,22 @@ import {
   lightColorTokens,
   motionTokens,
 } from '@lib/design-tokens';
-import { InkWell } from '@lib/material';
+import { InkWell } from '@lib/material/ink-well';
 import {
   BorderRadius,
   BoxDecoration,
   BoxShadow,
   EdgeInsets,
 } from '@lib/painting';
-import type { Color } from '@lib/std-ui';
-import { IconThemeData } from '@lib/theme-data';
-import { Center, DecoratedBox, Padding, SizedBox } from '@lib/widgets';
+import { Color } from '@lib/std-ui';
+import {
+  Center,
+  DecoratedBox,
+  IconTheme,
+  IconThemeData,
+  Padding,
+  SizedBox,
+} from '@lib/widgets';
 
 export const FloatingActionButton = ({ children, onPressed }: {
   onPressed: () => void;
@@ -25,13 +30,13 @@ export const FloatingActionButton = ({ children, onPressed }: {
   // shape: TODO: use proper shape,
   children: React.ReactChild;
 }) => {
-  const primary = chroma(lightColorTokens.primary);
+  const primary = lightColorTokens.primary;
   const iconColor = lightColorTokens.onPrimaryContainer;
-  const rippleColor = primary.alpha(0.5).hex();
+  const rippleColor = primary.withAlpha(0.5);
   const easing = Easing.bezier(...motionTokens.easing.emphasized);
   const shadowDecoration = BoxDecoration.new({
     shadow: BoxShadow.elevated({
-      color: 'black',
+      color: Color('black'),
       depth: elevationTokens.level3,
     }),
   });
@@ -61,14 +66,14 @@ export const FloatingActionButton = ({ children, onPressed }: {
               height={effectiveContainerSize}
             >
               <Center>
-                <IconThemeData
-                  value={{
+                <IconTheme
+                  value={IconThemeData({
                     size: iconSize,
                     color: iconColor,
-                  }}
+                  })}
                 >
                   {Children.only(children)}
-                </IconThemeData>
+                </IconTheme>
               </Center>
             </SizedBox>
           </InkWell>

@@ -1,14 +1,18 @@
 import {
+  AppBar,
   Center,
+  ColorScheme,
   Column,
+  EdgeInsets,
   FloatingActionButton,
+  MaterialApp,
+  MediaQueryData,
   Scaffold,
   Text,
-  TopAppBar,
+  ThemeData,
+  useTheme,
 } from '@grohden/react-native-flutter-components';
-import { typeScaleTokens } from '@lib/design-tokens';
-import { TopAppBarDataDefaults, TopAppBarTheme } from '@lib/theme-data';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
@@ -24,24 +28,42 @@ export default function CounterApp() {
 }
 
 const AfterSafeArea = () => {
-  const insets = useSafeAreaInsets();
+  const wrapperInsets = useSafeAreaInsets();
+  const query = useMemo(
+    () =>
+      new MediaQueryData({
+        padding: EdgeInsets.only(wrapperInsets),
+      }),
+    [wrapperInsets],
+  );
+
+  const { theme, darkTheme } = useMemo(() => ({
+    theme: ThemeData.new({
+      colorScheme: ColorScheme.lightM3(),
+    }),
+    darkTheme: ThemeData.new({
+      colorScheme: ColorScheme.darkM3(),
+    }),
+  }), []);
 
   return (
-    <TopAppBarTheme
-      value={{ ...TopAppBarDataDefaults, insets }}
-    >
-      <AfterTheme />
-    </TopAppBarTheme>
+    <MaterialApp
+      mediaQuery={query}
+      theme={theme}
+      darkTheme={darkTheme}
+      home={<Home />}
+    />
   );
 };
 
-const AfterTheme = () => {
+const Home = () => {
+  const theme = useTheme();
   const [count, setCount] = useState(0);
 
   const renderAppBar = () => (
-    <TopAppBar>
-      <Text>Demo Home Page</Text>
-    </TopAppBar>
+    <AppBar>
+      <Text>React Native Demo Home Page</Text>
+    </AppBar>
   );
 
   const renderFab = () => (
@@ -52,13 +74,13 @@ const AfterTheme = () => {
 
   return (
     <Scaffold
-      topAppBar={renderAppBar()}
+      appBar={renderAppBar()}
       floatingActionButton={renderFab()}
     >
       <Center>
         <Column>
           <Text>You have pushed the button this many times:</Text>
-          <Text style={typeScaleTokens.headlineMedium}>{count}</Text>
+          <Text style={theme.textTheme.headlineMedium}>{count}</Text>
         </Column>
       </Center>
     </Scaffold>
