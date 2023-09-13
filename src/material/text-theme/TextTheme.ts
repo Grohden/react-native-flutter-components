@@ -19,63 +19,34 @@ type TextThemeProps = {
   bodySmall?: TextStyle;
 };
 
-export class TextTheme {
-  readonly bodyLarge?: TextStyle;
-  readonly bodyMedium?: TextStyle;
-  readonly bodySmall?: TextStyle;
-  readonly displayLarge?: TextStyle;
-  readonly displayMedium?: TextStyle;
-  readonly displaySmall?: TextStyle;
-  readonly headlineLarge?: TextStyle;
-  readonly headlineMedium?: TextStyle;
-  readonly headlineSmall?: TextStyle;
-  readonly labelLarge?: TextStyle;
-  readonly labelMedium?: TextStyle;
-  readonly labelSmall?: TextStyle;
-  readonly titleLarge?: TextStyle;
-  readonly titleMedium?: TextStyle;
-  readonly titleSmall?: TextStyle;
+export type TextTheme = TextThemeProps & {
+  apply: (props: {
+    displayColor?: Color;
+    bodyColor?: Color;
+    fontFamily?: TextStyleProps['fontFamily'];
+    decoration?: TextStyleProps['decoration'];
+    decorationColor?: Color;
+    decorationStyle?: TextStyleProps['decorationStyle'];
+    fontSizeFactor?: number;
+    fontSizeDelta?: number;
+  }) => TextTheme;
+  copyWith: (other: Partial<TextThemeProps>) => TextTheme;
+  merge: (other: TextTheme | undefined) => TextTheme;
+};
 
-  constructor(props: TextThemeProps) {
-    this.displayLarge = props.displayLarge;
-    this.displayMedium = props.displayMedium;
-    this.displaySmall = props.displaySmall;
-    this.headlineLarge = props.headlineLarge;
-    this.headlineMedium = props.headlineMedium;
-    this.headlineSmall = props.headlineSmall;
-    this.titleLarge = props.titleLarge;
-    this.titleMedium = props.titleMedium;
-    this.titleSmall = props.titleSmall;
-    this.labelLarge = props.labelLarge;
-    this.labelMedium = props.labelMedium;
-    this.labelSmall = props.labelSmall;
-    this.bodyLarge = props.bodyLarge;
-    this.bodyMedium = props.bodyMedium;
-    this.bodySmall = props.bodySmall;
-  }
-
-  apply(
-    {
-      displayColor,
-      bodyColor,
-      fontFamily,
-      decoration,
-      decorationStyle,
-      decorationColor,
-      fontSizeFactor,
-      fontSizeDelta,
-    }: {
-      displayColor?: Color;
-      bodyColor?: Color;
-      fontFamily?: TextStyleProps['fontFamily'];
-      decoration?: TextStyleProps['decoration'];
-      decorationColor?: Color;
-      decorationStyle?: TextStyleProps['decorationStyle'];
-      fontSizeFactor?: number;
-      fontSizeDelta?: number;
-    },
-  ) {
-    return new TextTheme({
+export const TextTheme = (props: TextThemeProps): TextTheme => ({
+  ...props,
+  apply({
+    displayColor,
+    bodyColor,
+    fontFamily,
+    decoration,
+    decorationStyle,
+    decorationColor,
+    fontSizeFactor,
+    fontSizeDelta,
+  }) {
+    return TextTheme({
       displayLarge: this.displayLarge?.apply({
         color: displayColor,
         decoration: decoration,
@@ -212,10 +183,9 @@ export class TextTheme {
         fontSizeDelta: fontSizeDelta,
       }),
     });
-  }
-
-  copyWith(other: Partial<TextThemeProps>): TextTheme {
-    return new TextTheme({
+  },
+  copyWith(other) {
+    return TextTheme({
       bodyLarge: other.bodyLarge || this.bodyLarge,
       bodyMedium: other.bodyMedium || this.bodyMedium,
       bodySmall: other.bodySmall || this.bodySmall,
@@ -232,9 +202,8 @@ export class TextTheme {
       titleMedium: other.titleMedium || this.titleMedium,
       titleSmall: other.titleSmall || this.titleSmall,
     });
-  }
-
-  merge(other: TextTheme | undefined): TextTheme {
+  },
+  merge(other) {
     if (!other) {
       return this;
     }
@@ -271,5 +240,5 @@ export class TextTheme {
       labelSmall: this.labelSmall?.merge(other.labelSmall)
         || other.labelSmall,
     });
-  }
-}
+  },
+});

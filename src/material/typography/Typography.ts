@@ -13,7 +13,7 @@ const sfUiDisplay = undefined;
 const sfUiText = undefined;
 
 export class Typography {
-  static readonly blackMountainView = new TextTheme({
+  static readonly blackMountainView = TextTheme({
     displayLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.black54,
@@ -49,7 +49,7 @@ export class Typography {
     labelSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.black }),
   });
 
-  static readonly whiteMountainView = new TextTheme({
+  static readonly whiteMountainView = TextTheme({
     displayLarge: TextStyle({
       fontFamily: 'Roboto',
       color: Colors.white70,
@@ -82,7 +82,7 @@ export class Typography {
     labelSmall: TextStyle({ fontFamily: 'Roboto', color: Colors.white }),
   });
 
-  static readonly whiteCupertino = new TextTheme({
+  static readonly whiteCupertino = TextTheme({
     displayLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.white70,
@@ -118,7 +118,7 @@ export class Typography {
     labelSmall: TextStyle({ fontFamily: sfUiText, color: Colors.white }),
   });
 
-  static englishLike2021 = new TextTheme({
+  static englishLike2021 = TextTheme({
     displayLarge: TextStyle({
       fontSize: 57.0,
       fontWeight: '400',
@@ -211,7 +211,7 @@ export class Typography {
     }),
   });
 
-  static readonly blackCupertino = new TextTheme({
+  static readonly blackCupertino = TextTheme({
     displayLarge: TextStyle({
       fontFamily: sfUiDisplay,
       color: Colors.black54,
