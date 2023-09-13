@@ -31,7 +31,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
   const iconColor = colorScheme.onPrimaryContainer;
   const rippleColor = primary.withAlpha(0.5);
   const easing = Easing.bezier(0.2, 0, 0, 1);
-  const shadowDecoration = BoxDecoration.new({
+  const shadowDecoration = BoxDecoration({
     shadow: BoxShadow.elevated({
       color: Color('black'),
       depth: 6,
@@ -47,7 +47,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
       >
         <DecoratedBox
           clipsChildren
-          boxDecoration={BoxDecoration.new({
+          boxDecoration={BoxDecoration({
             color: colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(16),
           })}

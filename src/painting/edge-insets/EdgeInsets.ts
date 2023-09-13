@@ -7,6 +7,8 @@ export type EdgeInsetsOnly = {
   top?: number;
 };
 
+// Users will not be able to call the only constructor, so it's ok
+// to keep it as class
 export class EdgeInsets {
   private constructor(
     public top: number | undefined,

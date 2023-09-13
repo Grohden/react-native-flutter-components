@@ -1,4 +1,4 @@
-import { EdgeInsets } from '@lib/styles';
+import { EdgeInsets } from '@lib/painting';
 import type { Meta } from '@storybook/react-native';
 
 export type PaddingControlsType = {

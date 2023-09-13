@@ -1,6 +1,8 @@
 import {
   BoxConstraints,
   BoxDecoration,
+  Color,
+  Colors,
   Container,
   DecoratedBox,
   Padding,
@@ -39,15 +41,13 @@ export const Basic: Story<StoryProps> = (arg) => {
   return (
     <Container
       constraints={BoxConstraints.expand()}
-      boxDecoration={BoxDecoration.new({
-        color: 'rgba(126,229,103,0.23)',
+      boxDecoration={BoxDecoration({
+        color: Color('rgba(126,229,103,0.23)'),
       })}
     >
       <Padding padding={insets}>
         <DecoratedBox
-          boxDecoration={BoxDecoration.new({
-            color: 'white',
-          })}
+          boxDecoration={BoxDecoration({ color: Colors.white })}
         >
           <Placeholder />
         </DecoratedBox>

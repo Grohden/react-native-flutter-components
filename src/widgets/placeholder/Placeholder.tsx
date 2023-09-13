@@ -8,7 +8,7 @@ import { DecoratedBox } from '@lib/widgets/containers';
 export const Placeholder = (props: { color?: Color }) => {
   const [size, setSize] = useState(Size.square(0));
   const effectiveColor = props.color || Color('red');
-  const decoration = BoxDecoration.new({
+  const decoration = BoxDecoration({
     border: Border.all({ color: effectiveColor, width: 1 }),
   });
 
@@ -48,7 +48,7 @@ export const Placeholder = (props: { color?: Color }) => {
         onLayout={(event) => {
           const sizes = event.nativeEvent.layout;
 
-          setSize(Size.new(sizes.width, sizes.height));
+          setSize(Size(sizes));
         }}
       >
         {lineData && (

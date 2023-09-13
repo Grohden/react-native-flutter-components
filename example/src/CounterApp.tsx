@@ -31,7 +31,7 @@ const AfterSafeArea = () => {
   const wrapperInsets = useSafeAreaInsets();
   const query = useMemo(
     () =>
-      new MediaQueryData({
+      MediaQueryData({
         padding: EdgeInsets.only(wrapperInsets),
       }),
     [wrapperInsets],

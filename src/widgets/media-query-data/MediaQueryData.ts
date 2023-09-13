@@ -1,13 +1,7 @@
 import { EdgeInsets } from '@lib/painting';
 
-export class MediaQueryData {
-  readonly padding: EdgeInsets;
+export type MediaQueryData = {
+  padding: EdgeInsets;
+};
 
-  constructor({
-    padding = EdgeInsets.zero,
-  }: {
-    padding?: EdgeInsets;
-  }) {
-    this.padding = padding;
-  }
-}
+export const MediaQueryData = (props: MediaQueryData) => props;

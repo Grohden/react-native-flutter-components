@@ -1,4 +1,4 @@
-import { Size } from '@lib/styles';
+import { Size } from '@lib/std-ui';
 import type { Meta } from '@storybook/react-native';
 
 export type SizeControlsType = {
@@ -47,7 +47,10 @@ export const SizeControls = {
   resolve: (props: SizeControlsType) => {
     switch (props.sizeType) {
       case 'Only':
-        return Size.new(props.sizeOnlyWidth, props.sizeOnlyHeight);
+        return Size({
+          width: props.sizeOnlyWidth,
+          height: props.sizeOnlyHeight,
+        });
       case 'Radius':
         return Size.fromRadius(props.sizeRadius);
       default:

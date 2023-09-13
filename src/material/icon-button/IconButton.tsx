@@ -38,7 +38,7 @@ export const IconButton = ({ children, containerSize, size, onPressed }: {
   return (
     <DecoratedBox
       clipsChildren
-      boxDecoration={BoxDecoration.new({
+      boxDecoration={BoxDecoration({
         borderRadius: BorderRadius.circular(effectiveContainerSize),
       })}
     >

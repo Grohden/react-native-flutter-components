@@ -80,7 +80,7 @@ export const AppBar = (props: {
 
   return (
     <Container
-      boxDecoration={BoxDecoration.new({
+      boxDecoration={BoxDecoration({
         color: backgroundColor,
       })}
     >

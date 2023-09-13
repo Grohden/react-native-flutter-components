@@ -3,6 +3,7 @@ import {
   BorderRadius,
   BoxDecoration,
   Center,
+  Color,
   DecoratedBox,
   Placeholder,
   SizedBox,
@@ -36,16 +37,16 @@ export default SizedBoxMeta;
 
 export const Basic: Story<StoryProps> = (arg) => {
   const size = SizeControls.resolve(arg);
-  const border = Border.all({ color: 'red', width: 1 });
+  const border = Border.all({ color: Color('red'), width: 1 });
 
   let child;
   if (arg.sizeType === 'Radius') {
     const borderRadius = BorderRadius.circular(arg.sizeRadius);
 
     child = (
-      <DecoratedBox boxDecoration={BoxDecoration.new({ border })}>
+      <DecoratedBox boxDecoration={BoxDecoration({ border })}>
         <DecoratedBox
-          boxDecoration={BoxDecoration.new({ border, borderRadius })}
+          boxDecoration={BoxDecoration({ border, borderRadius })}
         >
           <SizedBox.fromSize size={size} />
         </DecoratedBox>
