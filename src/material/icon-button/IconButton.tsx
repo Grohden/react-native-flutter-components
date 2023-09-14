@@ -1,9 +1,9 @@
 import React, { Children, useMemo } from 'react';
 import { Easing } from 'react-native';
 
-import { useTheme } from '@lib/material';
 import { Colors } from '@lib/material/colors';
 import { InkWell } from '@lib/material/ink-well';
+import { useTheme } from '@lib/material/theme';
 import { BorderRadius, BoxDecoration } from '@lib/painting';
 import {
   Center,

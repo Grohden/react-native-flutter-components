@@ -1,8 +1,8 @@
 import React, { Children } from 'react';
 import { Easing } from 'react-native';
 
-import { useTheme } from '@lib/material';
 import { InkWell } from '@lib/material/ink-well';
+import { useTheme } from '@lib/material/theme';
 import {
   BorderRadius,
   BoxDecoration,

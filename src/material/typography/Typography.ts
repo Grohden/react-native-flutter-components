@@ -1,10 +1,10 @@
 import type { PlatformOSType } from 'react-native';
 
+import { ColorScheme } from '@lib/material/color-scheme';
+import { Colors } from '@lib/material/colors';
+import { TextTheme } from '@lib/material/text-theme';
 import { TextStyle } from '@lib/painting';
 import { Brightness } from '@lib/std-ui';
-import { ColorScheme } from '../color-scheme';
-import { Colors } from '../colors';
-import { TextTheme } from '../text-theme';
 
 // We, in theory should have two different fonts for iOS, I'm preserving
 //  semantics with this consts
