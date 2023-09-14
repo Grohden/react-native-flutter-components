@@ -1,3 +1,4 @@
+import { useTheme } from '@lib/material';
 import type { ReactChild } from 'react';
 import React, { Children } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -7,8 +8,14 @@ export const Scaffold = (props: {
   floatingActionButton?: ReactChild;
   children: ReactChild;
 }) => {
+  const theme = useTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[styles.container, {
+        backgroundColor: theme.colorScheme.background.hex(),
+      }]}
+    >
       {props.appBar && Children.only(props.appBar)}
       {Children.only(props.children)}
 
@@ -24,8 +31,6 @@ export const Scaffold = (props: {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // For shadows?
-    // backgroundColor: 'white',
   },
   fab: {
     position: 'absolute',
