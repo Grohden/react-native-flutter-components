@@ -1,14 +1,18 @@
 import { Theme } from '@lib/material/theme';
 import { ThemeData } from '@lib/material/theme-data';
+import { Brightness } from '@lib/std-ui';
 import { MediaQuery, MediaQueryData } from '@lib/widgets';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export const MaterialApp = ({
+  brightness = Brightness.light,
   mediaQuery,
   theme,
+  darkTheme,
   home,
 }: {
+  brightness?: Brightness;
   mediaQuery: MediaQueryData;
   theme: ThemeData;
   darkTheme: ThemeData;
@@ -28,7 +32,11 @@ export const MaterialApp = ({
     </MediaQuery>
   );
 
-  return <Theme themeData={theme}>{root}</Theme>;
+  return (
+    <Theme themeData={brightness === Brightness.light ? theme : darkTheme}>
+      {root}
+    </Theme>
+  );
 };
 
 const styles = StyleSheet.create({
