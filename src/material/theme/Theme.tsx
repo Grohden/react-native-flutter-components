@@ -1,5 +1,6 @@
 import { AppBarTheme } from '@lib/material/app-bar-theme';
 import { ThemeData } from '@lib/material/theme-data';
+import { DefaultTextStyle } from '@lib/widgets';
 import React, { Children, createContext, useContext } from 'react';
 
 const Context = createContext<ThemeData | null>(null);
@@ -25,7 +26,9 @@ export const Theme = (
 ) => (
   <Context.Provider value={themeData}>
     <AppBarTheme themeData={themeData.appBarTheme}>
-      {Children.only(children)}
+      <DefaultTextStyle value={{ style: themeData.textTheme.bodySmall! }}>
+        {Children.only(children)}
+      </DefaultTextStyle>
     </AppBarTheme>
   </Context.Provider>
 );
