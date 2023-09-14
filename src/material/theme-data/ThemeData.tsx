@@ -26,6 +26,10 @@ export class ThemeData {
   readonly colorScheme: ColorScheme;
   readonly textTheme: TextTheme;
 
+  get brightness() {
+    return this.colorScheme.brightness;
+  }
+
   // https://github.com/flutter/flutter/blob/2524052335/packages/flutter/lib/src/material/theme_data.dart#L1842
   static estimateBrightnessForColor(color: Color): Brightness {
     const relativeLuminance = color.luminance();
