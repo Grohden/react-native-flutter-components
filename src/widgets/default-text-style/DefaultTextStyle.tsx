@@ -9,6 +9,6 @@ export const {
 } = createComponentContext({
   style: TextStyle({
     fontFamily: undefined,
-    color: Color('black'),
+    color: Color('#000000FF'),
   }),
 });

@@ -1,6 +1,7 @@
 import React, { Children } from 'react';
 import { Easing } from 'react-native';
 
+import { Colors } from '@lib/material/colors';
 import { InkWell } from '@lib/material/ink-well';
 import { useTheme } from '@lib/material/theme';
 import {
@@ -33,7 +34,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
   const easing = Easing.bezier(0.2, 0, 0, 1);
   const shadowDecoration = BoxDecoration({
     shadow: BoxShadow.elevated({
-      color: Color('black'),
+      color: Colors.black,
       depth: 6,
     }),
   });

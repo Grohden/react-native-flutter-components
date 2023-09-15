@@ -1,6 +1,7 @@
-import { Colors } from '@lib/material';
-import { Color } from '@lib/std-ui';
-import { Brightness } from '@lib/std-ui';
+import { Scheme } from '@material/material-color-utilities';
+
+import { Colors } from '@lib/material/colors';
+import { Brightness, Color } from '@lib/std-ui';
 
 export type ColorScheme = {
   brightness: Brightness;
@@ -52,6 +53,97 @@ ColorScheme.light = (props: Partial<ColorScheme> = {}) => {
     surface: Colors.white,
     onSurface: Colors.black,
     ...props,
+  });
+};
+
+ColorScheme.fromSeed = ({
+  seedColor,
+  brightness = Brightness.light,
+  ...props
+}: {
+  seedColor: Color;
+  brightness?: Brightness;
+  primary?: Color;
+  onPrimary?: Color;
+  primaryContainer?: Color;
+  onPrimaryContainer?: Color;
+  secondary?: Color;
+  onSecondary?: Color;
+  secondaryContainer?: Color;
+  onSecondaryContainer?: Color;
+  tertiary?: Color;
+  onTertiary?: Color;
+  tertiaryContainer?: Color;
+  onTertiaryContainer?: Color;
+  error?: Color;
+  onError?: Color;
+  errorContainer?: Color;
+  onErrorContainer?: Color;
+  outline?: Color;
+  outlineVariant?: Color;
+  background?: Color;
+  onBackground?: Color;
+  surface?: Color;
+  onSurface?: Color;
+  surfaceVariant?: Color;
+  onSurfaceVariant?: Color;
+  inverseSurface?: Color;
+  onInverseSurface?: Color;
+  inversePrimary?: Color;
+  shadow?: Color;
+  scrim?: Color;
+  surfaceTint?: Color;
+}) => {
+  const scheme = brightness === Brightness.light
+    ? Scheme.light(seedColor.argb())
+    : Scheme.dark(seedColor.argb());
+
+  return ColorScheme({
+    primary: props.primary || Color.fromArgb(scheme.primary),
+    onPrimary: props.onPrimary || Color.fromArgb(scheme.onPrimary),
+    primaryContainer: props.primaryContainer
+      || Color.fromArgb(scheme.primaryContainer),
+    onPrimaryContainer: props.onPrimaryContainer
+      || Color.fromArgb(scheme.onPrimaryContainer),
+    secondary: props.secondary || Color.fromArgb(scheme.secondary),
+    onSecondary: props.onSecondary || Color.fromArgb(scheme.onSecondary),
+    secondaryContainer: props.secondaryContainer
+      || Color.fromArgb(scheme.secondaryContainer),
+    onSecondaryContainer: props.onSecondaryContainer
+      || Color.fromArgb(scheme.onSecondaryContainer),
+    tertiary: props.tertiary || Color.fromArgb(scheme.tertiary),
+    onTertiary: props.onTertiary || Color.fromArgb(scheme.onTertiary),
+    tertiaryContainer: props.tertiaryContainer
+      || Color.fromArgb(scheme.tertiaryContainer),
+    onTertiaryContainer: props.onTertiaryContainer
+      || Color.fromArgb(scheme.onTertiaryContainer),
+    error: props.error || Color.fromArgb(scheme.error),
+    onError: props.onError || Color.fromArgb(scheme.onError),
+    errorContainer: props.errorContainer
+      || Color.fromArgb(scheme.errorContainer),
+    onErrorContainer: props.onErrorContainer
+      || Color.fromArgb(scheme.onErrorContainer),
+    outline: props.outline || Color.fromArgb(scheme.outline),
+    outlineVariant: props.outlineVariant
+      || Color.fromArgb(scheme.outlineVariant),
+    background: props.background || Color.fromArgb(scheme.background),
+    onBackground: props.onBackground || Color.fromArgb(scheme.onBackground),
+    surface: props.surface || Color.fromArgb(scheme.surface),
+    onSurface: props.onSurface || Color.fromArgb(scheme.onSurface),
+    surfaceVariant: props.surfaceVariant
+      || Color.fromArgb(scheme.surfaceVariant),
+    onSurfaceVariant: props.onSurfaceVariant
+      || Color.fromArgb(scheme.onSurfaceVariant),
+    inverseSurface: props.inverseSurface
+      || Color.fromArgb(scheme.inverseSurface),
+    onInverseSurface: props.onInverseSurface
+      || Color.fromArgb(scheme.inverseOnSurface),
+    inversePrimary: props.inversePrimary
+      || Color.fromArgb(scheme.inversePrimary),
+    shadow: props.shadow || Color.fromArgb(scheme.shadow),
+    scrim: props.scrim || Color.fromArgb(scheme.scrim),
+    surfaceTint: props.surfaceTint || Color.fromArgb(scheme.primary),
+    brightness: brightness,
   });
 };
 

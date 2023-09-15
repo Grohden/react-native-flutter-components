@@ -1,5 +1,4 @@
 import { Color } from '@lib/std-ui';
-import chroma from 'chroma-js';
 
 type ColorSwatch = Color & {
   at: (idx: number) => Color | undefined;
@@ -7,7 +6,7 @@ type ColorSwatch = Color & {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ColorSwatch = (
-  color: string | chroma.Color,
+  color: string,
   swatch: Record<number, Color>,
 ): ColorSwatch => ({
   ...Color(color),
