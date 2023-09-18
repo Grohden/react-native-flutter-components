@@ -48,7 +48,7 @@ export const Placeholder = (props: { color?: Color }) => {
         onLayout={(event) => {
           const sizes = event.nativeEvent.layout;
 
-          setSize(Size(sizes));
+          setSize(Size(sizes.width, sizes.width));
         }}
       >
         {lineData && (

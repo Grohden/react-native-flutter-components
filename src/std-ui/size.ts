@@ -2,17 +2,17 @@ export type Size = {
   width: number;
   height: number;
 };
-export const Size = (size: Size) => ({
-  width: size.width,
-  height: size.height,
+export const Size = (width: number, height: number): Size => ({
+  width,
+  height,
 });
 
-Size.fromHeight = (height: number) => Size({ width: Infinity, height });
+Size.infinite = Size(Infinity, Infinity);
 
-Size.fromWidth = (width: number) => Size({ width, height: Infinity });
+Size.fromHeight = (height: number) => Size(Infinity, height);
 
-Size.fromRadius = (radius: number) =>
-  Size({ width: radius * 2, height: radius * 2 });
+Size.fromWidth = (width: number) => Size(width, Infinity);
 
-Size.square = (dimension: number) =>
-  Size({ width: dimension, height: dimension });
+Size.fromRadius = (radius: number) => Size(radius * 2, radius * 2);
+
+Size.square = (dimension: number) => Size(dimension, dimension);
