@@ -2,4 +2,5 @@
 
 export * from './brightness';
 export * from './color';
+export * from './offset';
 export * from './size';
