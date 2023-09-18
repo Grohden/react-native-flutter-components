@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
-import { Easing } from 'react-native';
 
 import { Colors } from '@lib/material/colors';
+import { kInkEasing } from '@lib/material/constants';
 import { InkWell } from '@lib/material/ink-well';
 import { useTheme } from '@lib/material/theme';
 import {
@@ -31,7 +31,6 @@ export const FloatingActionButton = ({ children, onPressed }: {
   const primary = colorScheme.primary;
   const iconColor = colorScheme.onPrimaryContainer;
   const rippleColor = primary.withOpacity(0.5);
-  const easing = Easing.bezier(0.2, 0, 0, 1);
   const shadowDecoration = BoxDecoration({
     shadow: BoxShadow.elevated({
       color: Colors.black,
@@ -55,7 +54,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
         >
           <InkWell
             duration={600}
-            easing={easing}
+            easing={kInkEasing}
             rippleColor={rippleColor}
             onPress={onPressed}
           >
