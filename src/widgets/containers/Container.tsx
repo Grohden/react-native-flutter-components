@@ -5,7 +5,7 @@ import { View } from 'react-native';
 import type {
   AlignmentGeometry,
   BoxDecoration,
-  EdgeInsets,
+  EdgeInsetsGeometry,
 } from '@lib/painting';
 import { BoxConstraints } from '@lib/rendering';
 
@@ -18,7 +18,7 @@ export const Container = ({
   align,
 }: React.PropsWithChildren<{
   boxDecoration?: BoxDecoration;
-  padding?: EdgeInsets;
+  padding?: EdgeInsetsGeometry;
   align?: AlignmentGeometry;
   constraints?: BoxConstraints;
   // FIXME: maybe its better to make this a component, but its usually a practice to
@@ -31,7 +31,7 @@ export const Container = ({
   //  on its original Container
   const style: ViewStyle = {
     ...boxDecoration?.toStyles(),
-    ...padding?.toPrefixedStyles('padding'),
+    ...padding?.toPaddingStyles(),
     ...align?.toStyles(),
     ...constraints?.toStyles(),
     overflow: clipsChildren ? 'hidden' : undefined,
