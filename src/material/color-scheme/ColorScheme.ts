@@ -26,8 +26,8 @@ export type ColorScheme = {
   surface: Color;
   onSurface: Color;
   surfaceVariant?: Color;
-  onSurfaceVariant?: Color;
-  outline?: Color;
+  onSurfaceVariant: Color;
+  outline: Color;
   outlineVariant?: Color;
   shadow?: Color;
   scrim?: Color;
@@ -37,9 +37,39 @@ export type ColorScheme = {
   surfaceTint?: Color;
 };
 
-export const ColorScheme = (props: ColorScheme) => props;
+// FIXME: find a place for these
+type Prettify<T> =
+  & { [K in keyof T]: T[K] }
+  & {};
 
-ColorScheme.light = (props: Partial<ColorScheme> = {}) => {
+type PartialSome<T, K extends keyof T> = Prettify<
+  & Omit<T, K>
+  & { [k in K]?: T[k] }
+  & {}
+>;
+
+type ColorSchemeProps = PartialSome<
+  ColorScheme,
+  'onSurfaceVariant' | 'outline' | 'outlineVariant' | 'inverseSurface'
+>;
+
+export const ColorScheme = (props: ColorSchemeProps): ColorScheme => ({
+  ...props,
+  get onSurfaceVariant() {
+    return props.onSurfaceVariant || props.onSurface;
+  },
+  get outline() {
+    return props.outline || props.onBackground;
+  },
+  get outlineVariant() {
+    return props.outlineVariant || props.onBackground;
+  },
+  get inverseSurface() {
+    return props.inverseSurface || props.onSurface;
+  },
+});
+
+ColorScheme.light = (props: Partial<ColorSchemeProps> = {}) => {
   return ColorScheme({
     brightness: Brightness.light,
     primary: Color('#6200EEFF'),
@@ -60,39 +90,8 @@ ColorScheme.fromSeed = ({
   seedColor,
   brightness = Brightness.light,
   ...props
-}: {
+}: Partial<ColorSchemeProps> & {
   seedColor: Color;
-  brightness?: Brightness;
-  primary?: Color;
-  onPrimary?: Color;
-  primaryContainer?: Color;
-  onPrimaryContainer?: Color;
-  secondary?: Color;
-  onSecondary?: Color;
-  secondaryContainer?: Color;
-  onSecondaryContainer?: Color;
-  tertiary?: Color;
-  onTertiary?: Color;
-  tertiaryContainer?: Color;
-  onTertiaryContainer?: Color;
-  error?: Color;
-  onError?: Color;
-  errorContainer?: Color;
-  onErrorContainer?: Color;
-  outline?: Color;
-  outlineVariant?: Color;
-  background?: Color;
-  onBackground?: Color;
-  surface?: Color;
-  onSurface?: Color;
-  surfaceVariant?: Color;
-  onSurfaceVariant?: Color;
-  inverseSurface?: Color;
-  onInverseSurface?: Color;
-  inversePrimary?: Color;
-  shadow?: Color;
-  scrim?: Color;
-  surfaceTint?: Color;
 }) => {
   const scheme = brightness === Brightness.light
     ? Scheme.light(seedColor.argb())
@@ -147,7 +146,7 @@ ColorScheme.fromSeed = ({
   });
 };
 
-ColorScheme.dark = (props: Partial<ColorScheme> = {}) =>
+ColorScheme.dark = (props: Partial<ColorSchemeProps> = {}) =>
   ColorScheme({
     brightness: Brightness.dark,
     primary: Color('#BB86FCFF'),
