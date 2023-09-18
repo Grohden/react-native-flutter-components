@@ -30,7 +30,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
   const { colorScheme } = useTheme();
   const primary = colorScheme.primary;
   const iconColor = colorScheme.onPrimaryContainer;
-  const rippleColor = primary.withAlpha(0.5);
+  const rippleColor = primary.withOpacity(0.5);
   const easing = Easing.bezier(0.2, 0, 0, 1);
   const shadowDecoration = BoxDecoration({
     shadow: BoxShadow.elevated({

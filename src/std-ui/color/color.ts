@@ -6,7 +6,7 @@ export type Color = {
   hex: () => string;
   argb: () => number;
   luminance: () => number;
-  withAlpha: (a: number) => Color;
+  withOpacity: (opacity: number) => Color;
 };
 
 export const Color = (value: string): Color => ({
@@ -15,8 +15,8 @@ export const Color = (value: string): Color => ({
   luminance() {
     return chroma(this.hex()).luminance();
   },
-  withAlpha(alpha) {
-    return Color(chroma(this.hex()).alpha(alpha).hex());
+  withOpacity(opacity) {
+    return Color(chroma(this.hex()).alpha(opacity).hex());
   },
 });
 
