@@ -1,6 +1,7 @@
+import { clampDouble } from '@material/material-color-utilities';
 import type { ViewStyle } from 'react-native';
 
-import type { Size } from '@lib/std-ui';
+import { Size } from '@lib/std-ui';
 
 const finiteOrExpanded = (v: number) => (isFinite(v) ? v : ('100%' as const));
 
@@ -37,10 +38,10 @@ export class BoxConstraints {
   }
 
   private constructor(
-    private readonly minWidth = 0,
-    private readonly maxWidth = Infinity,
-    private readonly minHeight = 0,
-    private readonly maxHeight = Infinity,
+    public readonly minWidth = 0,
+    public readonly maxWidth = Infinity,
+    public readonly minHeight = 0,
+    public readonly maxHeight = Infinity,
   ) {}
 
   toStyles() {
@@ -61,5 +62,34 @@ export class BoxConstraints {
     }
 
     return styles;
+  }
+
+  copyWith(props: {
+    minWidth?: number;
+    maxWidth?: number;
+    minHeight?: number;
+    maxHeight?: number;
+  }): BoxConstraints {
+    return new BoxConstraints(
+      props.minWidth ?? this.minWidth,
+      props.maxWidth ?? this.maxWidth,
+      props.minHeight ?? this.minHeight,
+      props.maxHeight ?? this.maxHeight,
+    );
+  }
+
+  constrainHeight(height = Infinity): number {
+    return clampDouble(height, this.minHeight, this.maxHeight);
+  }
+
+  constrainWidth(width = Infinity): number {
+    return clampDouble(width, this.minWidth, this.maxWidth);
+  }
+
+  constrain(size: Size): Size {
+    return Size(
+      this.constrainWidth(size.width),
+      this.constrainHeight(size.height),
+    );
   }
 }
