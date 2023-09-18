@@ -15,11 +15,11 @@ export const Container = ({
   padding,
   constraints,
   clipsChildren,
-  align,
+  alignment,
 }: React.PropsWithChildren<{
   boxDecoration?: BoxDecoration;
   padding?: EdgeInsetsGeometry;
-  align?: AlignmentGeometry;
+  alignment?: AlignmentGeometry;
   constraints?: BoxConstraints;
   // FIXME: maybe its better to make this a component, but its usually a practice to
   //  clip children when using radius, so for now it makes sense
@@ -32,7 +32,7 @@ export const Container = ({
   const style: ViewStyle = {
     ...boxDecoration?.toStyles(),
     ...padding?.toPaddingStyles(),
-    ...align?.toStyles(),
+    ...alignment?.toStyles(),
     ...constraints?.toStyles(),
     overflow: clipsChildren ? 'hidden' : undefined,
   };

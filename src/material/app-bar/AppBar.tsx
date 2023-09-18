@@ -87,7 +87,7 @@ export const AppBar = (props: {
       <Padding padding={EdgeInsets.only({ top: insets.top })}>
         <Container
           constraints={BoxConstraints.expand({ height: toolbarHeight })}
-          align={AlignmentDirectional.centerStart}
+          alignment={AlignmentDirectional.centerStart}
         >
           <IconTheme value={defaults.iconTheme!}>
             <Row mainAxisSize={MainAxisSize.max}>
