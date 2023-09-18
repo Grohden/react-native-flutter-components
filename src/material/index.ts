@@ -10,6 +10,7 @@ export * from './floating-action-button';
 export * from './icon-button';
 export * from './ink-well';
 export * from './material-app';
+export * from './material-state';
 export * from './scaffold';
 export * from './text-theme';
 export * from './theme';
