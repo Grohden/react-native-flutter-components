@@ -19,7 +19,8 @@ import { EdgeInsets } from '@lib/painting';
 import { Brightness, Color, Size } from '@lib/std-ui';
 import { IconThemeData, Semantics, useIconTheme } from '@lib/widgets';
 
-import { IconButton, VisualDensity } from '@lib/material';
+import { IconButton } from '@lib/material/icon-button';
+import { VisualDensity } from '@lib/material/theme-data';
 import type { IconButtonVariant } from './_IconButtonVariant';
 
 export const IconButtonM3 = ({

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { ViewStyle } from 'react-native';
-import { View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { BoxConstraints } from '@lib/rendering';
 import { Offset, Size, TextDirection } from '@lib/std-ui';
@@ -184,7 +184,7 @@ export const NavigationToolbar = ({
   return (
     <View
       onLayout={event => setToolbarSize(sizeOfOnLayout(event))}
-      style={{ height: '100%' }}
+      style={styles.container}
     >
       <View
         onLayout={event => setLeadingSize(sizeOfOnLayout(event))}
@@ -209,3 +209,9 @@ export const NavigationToolbar = ({
 };
 
 NavigationToolbar.kMiddleSpacing = 16;
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+  },
+});
