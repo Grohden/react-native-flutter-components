@@ -27,7 +27,7 @@ export const MaterialApp = ({
   // Flutter actually uses View which renders a FlutterView
   //  and that seems to be the root for MediaQuery
   root = (
-    <MediaQuery value={mediaQuery}>
+    <MediaQuery data={mediaQuery}>
       {root}
     </MediaQuery>
   );

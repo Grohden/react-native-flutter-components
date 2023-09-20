@@ -16,14 +16,14 @@ export const useMediaQuery = () => {
 
 export const MediaQuery = (
   {
-    value,
+    data,
     children,
   }: {
-    value: MediaQueryData;
+    data: MediaQueryData;
     children: React.ReactChild;
   },
 ) => (
-  <Context.Provider value={value}>
+  <Context.Provider value={data}>
     {Children.only(children)}
   </Context.Provider>
 );
