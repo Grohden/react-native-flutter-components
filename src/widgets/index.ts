@@ -8,6 +8,7 @@ export * from './icon-theme';
 export * from './icon-theme-data';
 export * from './media-query';
 export * from './media-query-data';
+export * from './navigation-toolbar';
 export * from './placeholder';
 export * from './safe-area';
 export * from './sized-box';
