@@ -4,6 +4,7 @@ export * from './app-bar';
 export * from './app-bar-theme';
 export * from './app-bar-theme-data';
 export * from './button-style';
+export * from './button-style-button';
 export * from './color-scheme';
 export * from './colors';
 export * from './constants';
