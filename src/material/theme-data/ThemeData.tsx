@@ -3,9 +3,12 @@ import type { PlatformOSType } from 'react-native';
 
 import { AppBarThemeData } from '@lib/material/app-bar-theme-data';
 import { ColorScheme } from '@lib/material/color-scheme';
+import { IconButtonThemeData } from '@lib/material/icon-button-theme-data';
 import { TextTheme } from '@lib/material/text-theme';
 import { Typography } from '@lib/material/typography';
 import { Brightness, Color } from '@lib/std-ui';
+
+import { VisualDensity } from './VisualDensity';
 
 type ThemeDataProps = {
   platform: PlatformOSType;
@@ -14,6 +17,8 @@ type ThemeDataProps = {
   textTheme: TextTheme;
   primaryTextTheme: TextTheme;
   appBarTheme: AppBarThemeData;
+  iconButtonTheme: IconButtonThemeData;
+  visualDensity: VisualDensity;
 };
 
 type NewThemeDataProps = Partial<ThemeDataProps> & {
@@ -25,6 +30,9 @@ export class ThemeData {
   readonly appBarTheme: AppBarThemeData;
   readonly colorScheme: ColorScheme;
   readonly textTheme: TextTheme;
+  readonly iconButtonTheme: IconButtonThemeData;
+  readonly visualDensity: VisualDensity;
+  readonly platform: PlatformOSType;
 
   get brightness() {
     return this.colorScheme.brightness;
@@ -50,6 +58,8 @@ export class ThemeData {
       textTheme,
       primaryTextTheme,
       appBarTheme,
+      iconButtonTheme,
+      visualDensity,
     }: NewThemeDataProps,
   ) {
     // General configs
@@ -77,6 +87,8 @@ export class ThemeData {
     primaryTextTheme = defaultPrimaryTextTheme.merge(primaryTextTheme);
 
     appBarTheme ||= AppBarThemeData();
+    iconButtonTheme ||= IconButtonThemeData();
+    visualDensity ||= VisualDensity.defaultDensityForPlatform(platform);
 
     return new ThemeData({
       colorScheme,
@@ -85,6 +97,8 @@ export class ThemeData {
       textTheme,
       primaryTextTheme,
       appBarTheme,
+      iconButtonTheme,
+      visualDensity,
     });
   }
 
@@ -92,5 +106,8 @@ export class ThemeData {
     this.appBarTheme = props.appBarTheme;
     this.colorScheme = props.colorScheme;
     this.textTheme = props.textTheme;
+    this.iconButtonTheme = props.iconButtonTheme;
+    this.visualDensity = props.visualDensity;
+    this.platform = props.platform;
   }
 }

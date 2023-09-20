@@ -1,7 +1,9 @@
+import React, { Children, createContext, useContext } from 'react';
+
 import { AppBarTheme } from '@lib/material/app-bar-theme';
+import { IconButtonTheme } from '@lib/material/icon-button-theme';
 import { ThemeData } from '@lib/material/theme-data';
 import { DefaultTextStyle } from '@lib/widgets';
-import React, { Children, createContext, useContext } from 'react';
 
 const Context = createContext<ThemeData | null>(null);
 
@@ -23,12 +25,23 @@ export const Theme = (
     themeData: ThemeData;
     children: React.ReactChild;
   },
-) => (
-  <Context.Provider value={themeData}>
+) => {
+  let root = Children.only(children);
+  root = (
+    <DefaultTextStyle value={{ style: themeData.textTheme.bodySmall! }}>
+      {root}
+    </DefaultTextStyle>
+  );
+  root = (
+    <IconButtonTheme data={themeData.iconButtonTheme}>
+      {root}
+    </IconButtonTheme>
+  );
+  root = (
     <AppBarTheme themeData={themeData.appBarTheme}>
-      <DefaultTextStyle value={{ style: themeData.textTheme.bodySmall! }}>
-        {Children.only(children)}
-      </DefaultTextStyle>
+      {root}
     </AppBarTheme>
-  </Context.Provider>
-);
+  );
+
+  return <Context.Provider value={themeData}>{root}</Context.Provider>;
+};
