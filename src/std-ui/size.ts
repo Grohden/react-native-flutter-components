@@ -9,6 +9,8 @@ export const Size = (width: number, height: number): Size => ({
 
 Size.infinite = Size(Infinity, Infinity);
 
+Size.zero = Size(0.0, 0.0);
+
 Size.fromHeight = (height: number) => Size(Infinity, height);
 
 Size.fromWidth = (width: number) => Size(width, Infinity);
