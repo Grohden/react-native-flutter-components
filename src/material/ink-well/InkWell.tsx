@@ -7,6 +7,7 @@ import { InkRipple } from './_InkRipple';
 import type { InkRippleProps } from './_InkRipple';
 
 // Should we do as flutter? the base for Ink stuff is Material
+// FIXME: implement splash factories for ink wheel
 export const InkWell = ({
   role,
   rippleColor,
@@ -19,6 +20,7 @@ export const InkWell = ({
   duration: number;
   easing: EasingFunction;
   rippleColor: Color;
+  autofocus?: boolean;
   onPress?: () => void;
 }>) => {
   const rippleIds = useRef(0);
