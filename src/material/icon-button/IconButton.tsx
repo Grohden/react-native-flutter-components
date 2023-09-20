@@ -1,69 +1,179 @@
-import React, { Children, useMemo } from 'react';
-import { Easing } from 'react-native';
+import React from 'react';
 
-import { Colors } from '@lib/material/colors';
-import { InkWell } from '@lib/material/ink-well';
-import { useTheme } from '@lib/material/theme';
-import { BorderRadius, BoxDecoration } from '@lib/painting';
+import { ButtonStyle } from '@lib/material/button-style';
+import { ButtonStyleButton } from '@lib/material/button-style-button';
+import type { MaterialStateProperty } from '@lib/material/material-state';
+import { MaterialState } from '@lib/material/material-state';
+import type { VisualDensity } from '@lib/material/theme-data';
 import {
-  Center,
-  DecoratedBox,
-  IconTheme,
-  IconThemeData,
-  SizedBox,
-} from '@lib/widgets';
+  AlignmentGeometry,
+  BorderSide,
+  EdgeInsetsGeometry,
+} from '@lib/painting';
+import type { Color, Size } from '@lib/std-ui';
 
-export const IconButton = ({ children, containerSize, size, onPressed }: {
-  onPressed: () => void;
+import { IconButtonM3 } from './_IconButtonM3';
+import { IconButtonVariant } from './_IconButtonVariant';
+
+export const IconButton = ({
+  children,
+  onPress,
+  style,
+  autofocus = false,
+  variant = IconButtonVariant.standard,
+}: {
+  onPress: () => void;
   children: React.ReactChild;
-  containerSize?: number;
-  size?: number;
+  style?: ButtonStyle;
+  autofocus?: boolean;
+  variant?: IconButtonVariant;
+}) => (
+  <IconButtonM3
+    // statesController{statesController}
+    style={style}
+    autofocus={autofocus}
+    // focusNode={widget.focusNode}
+    onPress={onPress}
+    variant={variant}
+  >
+    {children}
+  </IconButtonM3>
+);
+
+IconButton.styleFrom = (props: {
+  foregroundColor?: Color;
+  backgroundColor?: Color;
+  disabledForegroundColor?: Color;
+  disabledBackgroundColor?: Color;
+  focusColor?: Color;
+  hoverColor?: Color;
+  highlightColor?: Color;
+  shadowColor?: Color;
+  surfaceTintColor?: Color;
+  elevation?: number;
+  minimumSize?: Size;
+  fixedSize?: Size;
+  maximumSize?: Size;
+  iconSize?: number;
+  side?: BorderSide;
+  // shape: OutlinedBorder | undefined,
+  padding?: EdgeInsetsGeometry;
+  // enabledMouseCursor: MouseCursor | undefined,
+  // disabledMouseCursor: MouseCursor | undefined,
+  visualDensity?: VisualDensity;
+  // tapTargetSize: MaterialTapTargetSize | undefined;
+  // animationDuration: Duration | undefined;
+  enableFeedback?: boolean;
+  alignment?: AlignmentGeometry;
+  // splashFactory: InteractiveInkFeatureFactory | undefined,
 }) => {
-  const { colorScheme } = useTheme();
-  const primary = colorScheme.primary;
+  const buttonBackgroundColor =
+    (!props.backgroundColor && !props.disabledBackgroundColor)
+      ? undefined
+      : IconButtonDefaultBackground(
+        props.backgroundColor,
+        props.disabledBackgroundColor,
+      );
+  const buttonForegroundColor =
+    (!props.foregroundColor && !props.disabledForegroundColor)
+      ? undefined
+      : IconButtonDefaultForeground(
+        props.foregroundColor,
+        props.disabledForegroundColor,
+      );
+  const overlayColor =
+    (!props.foregroundColor && !props.hoverColor && !props.focusColor
+        && !props.highlightColor)
+      ? undefined
+      : IconButtonDefaultOverlay(
+        props.foregroundColor,
+        props.focusColor,
+        props.hoverColor,
+        props.highlightColor,
+      );
+  // const mouseCursor = _IconButtonDefaultMouseCursor(
+  //   props.enabledMouseCursor,
+  //   props.disabledMouseCursor,
+  // );
 
-  const { easing, iconColor, rippleColor } = useMemo(() => {
-    return {
-      easing: Easing.bezier(0.2, 0, 0, 1),
-      iconColor: primary.luminance() < 0.5 ? Colors.black : Colors.white,
-      rippleColor: primary.withAlpha(0.5),
-    };
-  }, [primary]);
-
-  const effectiveSize = size ?? 32;
-  const effectiveContainerSize = containerSize ?? 48;
-
-  // FIXME: we prob need a theme for each token kind
-  // FIXME: need to review ripple duration
-  return (
-    <DecoratedBox
-      clipsChildren
-      boxDecoration={BoxDecoration({
-        borderRadius: BorderRadius.circular(effectiveContainerSize),
-      })}
-    >
-      <InkWell
-        duration={600}
-        easing={easing}
-        rippleColor={rippleColor}
-        onPress={onPressed}
-      >
-        <SizedBox
-          width={effectiveContainerSize}
-          height={effectiveContainerSize}
-        >
-          <Center>
-            <IconTheme
-              value={IconThemeData({
-                size: effectiveSize,
-                color: iconColor,
-              })}
-            >
-              {Children.only(children)}
-            </IconTheme>
-          </Center>
-        </SizedBox>
-      </InkWell>
-    </DecoratedBox>
-  );
+  return ButtonStyle({
+    backgroundColor: buttonBackgroundColor,
+    foregroundColor: buttonForegroundColor,
+    overlayColor: overlayColor,
+    shadowColor: ButtonStyleButton.allOrNull(props.shadowColor),
+    surfaceTintColor: ButtonStyleButton.allOrNull(props.surfaceTintColor),
+    elevation: ButtonStyleButton.allOrNull(props.elevation),
+    padding: ButtonStyleButton.allOrNull(props.padding),
+    minimumSize: ButtonStyleButton.allOrNull(props.minimumSize),
+    fixedSize: ButtonStyleButton.allOrNull(props.fixedSize),
+    maximumSize: ButtonStyleButton.allOrNull(props.maximumSize),
+    iconSize: ButtonStyleButton.allOrNull(props.iconSize),
+    side: ButtonStyleButton.allOrNull(props.side),
+    // shape: ButtonStyleButton.allOrNull<OutlinedBorder>(shape),
+    // mouseCursor: mouseCursor,
+    visualDensity: props.visualDensity,
+    // tapTargetSize: props.tapTargetSize,
+    // animationDuration: props.animationDuration,
+    // enableFeedback: props.enableFeedback,
+    alignment: props.alignment,
+    // splashFactory: props.splashFactory,
+  });
 };
+
+const IconButtonDefaultBackground = (
+  background: Color | undefined,
+  disabledBackground: Color | undefined,
+): MaterialStateProperty<Color | undefined> => ({
+  resolve: (states) => {
+    if (states.has(MaterialState.disabled)) {
+      return disabledBackground;
+    }
+
+    return background;
+  },
+});
+
+const IconButtonDefaultForeground = (
+  foregroundColor: Color | undefined,
+  disabledForegroundColor: Color | undefined,
+): MaterialStateProperty<Color | undefined> => ({
+  resolve: (states) => {
+    if (states.has(MaterialState.disabled)) {
+      return disabledForegroundColor;
+    }
+
+    return foregroundColor;
+  },
+});
+
+const IconButtonDefaultOverlay = (
+  foregroundColor: Color | undefined,
+  focusColor: Color | undefined,
+  hoverColor: Color | undefined,
+  highlightColor: Color | undefined,
+): MaterialStateProperty<Color | undefined> => ({
+  resolve: (states) => {
+    if (states.has(MaterialState.selected)) {
+      if (states.has(MaterialState.pressed)) {
+        return highlightColor ?? foregroundColor?.withOpacity(0.12);
+      }
+      if (states.has(MaterialState.hovered)) {
+        return hoverColor ?? foregroundColor?.withOpacity(0.08);
+      }
+      if (states.has(MaterialState.focused)) {
+        return focusColor ?? foregroundColor?.withOpacity(0.12);
+      }
+    }
+    if (states.has(MaterialState.pressed)) {
+      return highlightColor ?? foregroundColor?.withOpacity(0.12);
+    }
+    if (states.has(MaterialState.hovered)) {
+      return hoverColor ?? foregroundColor?.withOpacity(0.08);
+    }
+    if (states.has(MaterialState.focused)) {
+      return focusColor ?? foregroundColor?.withOpacity(0.08);
+    }
+
+    return undefined;
+  },
+});

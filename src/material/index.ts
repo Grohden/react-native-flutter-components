@@ -10,6 +10,7 @@ export * from './colors';
 export * from './constants';
 export * from './floating-action-button';
 export * from './icon-button';
+export * from './icon-button-theme';
 export * from './icon-button-theme-data';
 export * from './ink-well';
 export * from './material-app';
