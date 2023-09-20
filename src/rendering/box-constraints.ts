@@ -23,6 +23,15 @@ export class BoxConstraints {
     return new BoxConstraints(size.width, size.width, size.width, size.height);
   }
 
+  static tightFor({ width, height }: { width?: number; height?: number }) {
+    return new BoxConstraints(
+      width ?? 0.0,
+      width ?? Infinity,
+      height ?? 0.0,
+      height ?? Infinity,
+    );
+  }
+
   static new(constraints: {
     minWidth?: number;
     maxWidth?: number;
@@ -45,6 +54,26 @@ export class BoxConstraints {
   ) {}
 
   toStyles() {
+    return {
+      ...this.toVerticalStyles(),
+      ...this.toHorizontalStyles(),
+    };
+  }
+
+  toHorizontalStyles() {
+    const styles: ViewStyle = {};
+
+    if (this.minWidth === this.maxWidth) {
+      styles.width = finiteOrExpanded(this.maxWidth);
+    } else {
+      styles.minWidth = finiteOrExpanded(this.minWidth);
+      styles.maxWidth = finiteOrExpanded(this.maxWidth);
+    }
+
+    return styles;
+  }
+
+  toVerticalStyles() {
     const styles: ViewStyle = {};
 
     if (this.minHeight === this.maxHeight) {
@@ -52,13 +81,6 @@ export class BoxConstraints {
     } else {
       styles.minHeight = finiteOrExpanded(this.minHeight);
       styles.maxHeight = finiteOrExpanded(this.maxHeight);
-    }
-
-    if (this.minWidth === this.maxWidth) {
-      styles.width = finiteOrExpanded(this.maxWidth);
-    } else {
-      styles.minWidth = finiteOrExpanded(this.minWidth);
-      styles.maxWidth = finiteOrExpanded(this.maxWidth);
     }
 
     return styles;
@@ -79,11 +101,11 @@ export class BoxConstraints {
   }
 
   constrainHeight(height = Infinity): number {
-    return clampDouble(height, this.minHeight, this.maxHeight);
+    return clampDouble(this.minHeight, this.maxHeight, height);
   }
 
   constrainWidth(width = Infinity): number {
-    return clampDouble(width, this.minWidth, this.maxWidth);
+    return clampDouble(this.minWidth, this.maxWidth, width);
   }
 
   constrain(size: Size): Size {
