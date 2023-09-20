@@ -1,4 +1,5 @@
 import { clampDouble } from '@material/material-color-utilities';
+import type { PlatformOSType } from 'react-native';
 
 import { BoxConstraints } from '@lib/rendering';
 import { Offset } from '@lib/std-ui';
@@ -42,3 +43,18 @@ export const VisualDensity = ({
     });
   },
 });
+
+VisualDensity.defaultDensityForPlatform = (platform: PlatformOSType) => {
+  switch (platform) {
+    // case 'linux':
+    case 'macos':
+    case 'windows':
+      return VisualDensity.compact;
+  }
+
+  return VisualDensity.standard;
+};
+
+VisualDensity.standard = VisualDensity({ horizontal: -2.0, vertical: -2.0 });
+
+VisualDensity.compact = VisualDensity({});
