@@ -7,7 +7,7 @@ export const Expanded = ({ children }: { children?: React.ReactChild }) => (
   </View>
 );
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   expanded: {
     flex: 1,
   },
