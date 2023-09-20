@@ -1,7 +1,9 @@
-import { useTheme } from '@lib/material';
 import type { ReactChild } from 'react';
 import React, { Children } from 'react';
 import { StyleSheet, View } from 'react-native';
+
+import { useTheme } from '@lib/material/theme';
+import { SafeArea } from '@lib/widgets';
 
 export const Scaffold = (props: {
   appBar?: ReactChild;
@@ -21,7 +23,9 @@ export const Scaffold = (props: {
 
       {props.floatingActionButton && (
         <View style={styles.fab}>
-          {Children.only(props.floatingActionButton)}
+          <SafeArea top>
+            {Children.only(props.floatingActionButton)}
+          </SafeArea>
         </View>
       )}
     </View>
@@ -35,7 +39,6 @@ const styles = StyleSheet.create({
   fab: {
     position: 'absolute',
     right: 0,
-    // FIXME: need to solve safe area constraints for scaffold
-    bottom: 42,
+    bottom: 0,
   },
 });
