@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "rules": {
+    "no-restricted-imports": ["error", {
+      "paths": [ {
+        "name": "@lib/widgets",
+        "message": "Import from specific @lib/widgets paths to avoid circular refs "
+      }]
+    }]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "rules": {
+    "no-restricted-imports": ["error", {
+      "paths": [ {
+        "name": "@lib/painting",
+        "message": "Import from specific @lib/painting paths to avoid circular refs "
+      }]
+    }]
+  }
+}

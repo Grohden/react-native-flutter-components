@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "rules": {
+    "no-restricted-imports": ["error", {
+      "paths": [ {
+        "name": "@lib/rendering",
+        "message": "Import from specific @lib/rendering paths to avoid circular refs "
+      }]
+    }]
+  }
+}

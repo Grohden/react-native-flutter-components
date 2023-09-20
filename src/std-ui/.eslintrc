@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "rules": {
+    "no-restricted-imports": ["error", {
+      "paths": [ {
+        "name": "@lib/std-ui",
+        "message": "Import from specific @lib/std-ui paths to avoid circular refs "
+      }]
+    }]
+  }
+}

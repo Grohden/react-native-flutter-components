@@ -5,7 +5,9 @@ const base = path.join(__dirname, '..', 'src');
 
 const fileExtsReg = /\.tsx?/;
 
-const isIgnored = (name) => name !== 'index.ts' && !name.startsWith('_');
+const isIgnored = (name) => {
+  return name !== 'index.ts' && !name.startsWith('_') && name !== '.eslintrc';
+};
 
 const scanAndGenerate = (targetFolder, depth = 0) => {
   const rawNames = [];

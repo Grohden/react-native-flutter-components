@@ -1,0 +1,11 @@
+{
+  "root": false,
+  "rules": {
+    "no-restricted-imports": ["error", {
+      "paths": [ {
+        "name": "@lib/material",
+        "message": "Import from specific @lib/material paths to avoid circular refs "
+      }]
+    }]
+  }
+}
