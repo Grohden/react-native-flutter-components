@@ -2,7 +2,7 @@ import { AppBarThemeData } from '@lib/material/app-bar-theme-data';
 import { ColorScheme } from '@lib/material/color-scheme';
 import { Colors } from '@lib/material/colors';
 import { TextTheme } from '@lib/material/text-theme';
-import { IconThemeData } from '@lib/widgets';
+import { IconThemeData, NavigationToolbar } from '@lib/widgets';
 
 export const AppBarDefaultsM3 = (props: {
   colors: ColorScheme;
@@ -11,7 +11,7 @@ export const AppBarDefaultsM3 = (props: {
   AppBarThemeData({
     elevation: 0.0,
     scrolledUnderElevation: 3.0,
-    // titleSpacing: NavigationToolbar.kMiddleSpacing,
+    titleSpacing: NavigationToolbar.kMiddleSpacing,
     toolbarHeight: 64.0,
     // FIXME: this is .surface
     //  but maybe material state makes it use the this value

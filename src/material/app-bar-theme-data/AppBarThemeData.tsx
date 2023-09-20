@@ -14,7 +14,7 @@ type AppBarThemeValues = {
   iconTheme?: IconThemeData;
   actionsIconTheme?: IconThemeData;
   centerTitle?: boolean;
-  // double? titleSpacing,
+  titleSpacing?: number;
   toolbarHeight?: number;
   toolbarTextStyle?: TextStyle;
   titleTextStyle?: TextStyle;

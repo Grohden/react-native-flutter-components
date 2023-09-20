@@ -1,48 +1,74 @@
-import type { ReactNode } from 'react';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { useAppBarTheme } from '@lib/material/app-bar-theme';
 import { kToolbarHeight } from '@lib/material/constants';
+import { IconButton } from '@lib/material/icon-button';
+import { IconButtonTheme } from '@lib/material/icon-button-theme';
+import { useIconButtonTheme } from '@lib/material/icon-button-theme';
+import { IconButtonThemeData } from '@lib/material/icon-button-theme-data';
 import { useTheme } from '@lib/material/theme';
-import {
-  AlignmentDirectional,
-  BoxDecoration,
-  EdgeInsets,
-  TextStyle,
-} from '@lib/painting';
-import { BoxConstraints, MainAxisSize } from '@lib/rendering';
+import { BoxDecoration, TextStyle } from '@lib/painting';
+import { BoxConstraints } from '@lib/rendering';
 import type { Color } from '@lib/std-ui';
 import {
   Center,
+  ConstrainedBox,
   Container,
   DefaultTextStyle,
-  IconTheme,
-  Padding,
-  Row,
-  SizedBox,
+  IconThemeData,
+  MediaQuery,
+  NavigationToolbar,
+  SafeArea,
   useMediaQuery,
 } from '@lib/widgets';
 
 import { AppBarDefaultsM3 } from './_AppBarDefaultsM3';
 
+const _kMaxTitleTextScaleFactor = 1.34;
+const _kLeadingWidth = kToolbarHeight; // so its squared
+const actions: any = [];
+
 // https://m3.material.io/components/top-app-bar/specs
 // we're for now just implementing the small top appbar
 // https://m3.material.io/components/top-app-bar/specs#14e23895-ac2e-40d8-b0f7-8d016c10a225
 export const AppBar = (props: {
-  leadingAction?: ReactNode;
-  children?: ReactNode;
-  titleCentered?: boolean;
+  leadingAction?: React.ReactChild;
+  leadingWidth?: number;
+  children?: React.ReactChild;
+  centerTitle?: boolean;
+  titleSpacing?: number;
   toolbarHeight?: number;
   foregroundColor?: Color;
   titleTextStyle?: TextStyle;
   toolbarTextStyle?: TextStyle;
+  iconTheme?: IconThemeData;
 }) => {
-  const insets = useMediaQuery().padding;
+  const mediaQueryData = useMediaQuery();
   const theme = useTheme();
   const appBarTheme = useAppBarTheme();
+  const iconButtonTheme = useIconButtonTheme();
 
   // FIXME: this is apparently inferred (probably based on actions)
-  const effectiveCentered = props.titleCentered ?? true;
+  const effectiveCentered = useMemo(() => {
+    const platformCenter = () => {
+      switch (theme.platform) {
+        case 'ios':
+        case 'macos':
+          return !actions || actions?.length < 2;
+        // case 'fuchsia':
+        // case 'linux':
+        // case 'android':
+        // case 'windows':
+        default:
+          return false;
+      }
+    };
+
+    return props.centerTitle
+      ?? theme.appBarTheme.centerTitle
+      ?? platformCenter();
+  }, [props.centerTitle, theme.appBarTheme.centerTitle, theme.platform]);
+
   const toolbarHeight = props.toolbarHeight ?? appBarTheme.toolbarHeight
     ?? kToolbarHeight;
   const defaults = AppBarDefaultsM3({
@@ -55,6 +81,10 @@ export const AppBar = (props: {
     || appBarTheme.foregroundColor
     || defaults.foregroundColor!;
 
+  const overallIconTheme = props.iconTheme
+    || appBarTheme.iconTheme
+    || defaults.iconTheme!.copyWith({ color: foregroundColor });
+
   // const toolbarTextStyle = props.toolbarTextStyle
   //   || appBarTheme.toolbarTextStyle
   //   || defaults.toolbarTextStyle?.copyWith({ color: foregroundColor });
@@ -63,60 +93,98 @@ export const AppBar = (props: {
     || appBarTheme.titleTextStyle
     || defaults.titleTextStyle?.copyWith({ color: foregroundColor });
 
-  let title = (
-    <DefaultTextStyle value={{ style: titleTextStyle! }}>
-      {props.children}
-    </DefaultTextStyle>
+  let title = props.children;
+  if (title) {
+    // title = _AppBarTitleBox({ child: title });
+    title = (
+      <DefaultTextStyle
+        value={{
+          style: titleTextStyle!,
+          // softWrap: false,
+          // overflow: TextOverflow.ellipsis,
+        }}
+      >
+        {title}
+      </DefaultTextStyle>
+    );
+
+    // Set maximum text scale factor to [_kMaxTitleTextScaleFactor] for the
+    // title to keep the visual hierarchy the same even with larger font
+    // sizes. To opt out, wrap the [title] widget in a [MediaQuery] widget
+    // with [MediaQueryData.textScaleFactor] set to
+    // `MediaQuery.textScaleFactorOf(context)`.
+    title = (
+      <MediaQuery
+        data={mediaQueryData.copyWith({
+          textScaleFactor: Math.min(
+            mediaQueryData.textScaleFactor,
+            _kMaxTitleTextScaleFactor,
+          ),
+        })}
+      >
+        {title}
+      </MediaQuery>
+    );
+  }
+
+  let leading = props.leadingAction;
+  if (leading) {
+    let effectiveIconButtonTheme: IconButtonThemeData;
+    const leadingIconButtonStyle = IconButton.styleFrom({
+      foregroundColor: overallIconTheme.color,
+      iconSize: overallIconTheme.size,
+    });
+
+    effectiveIconButtonTheme = IconButtonThemeData({
+      style: iconButtonTheme.style?.copyWith({
+        foregroundColor: leadingIconButtonStyle.foregroundColor,
+        overlayColor: leadingIconButtonStyle.overlayColor,
+        iconSize: leadingIconButtonStyle.iconSize,
+      }),
+    });
+
+    // FIXME: how to check instances?
+    // child: leading is IconButton ? Center(child: leading) : leading,
+    leading = (
+      <IconButtonTheme
+        data={effectiveIconButtonTheme}
+      >
+        <Center>{leading}</Center>
+      </IconButtonTheme>
+    );
+
+    leading = (
+      <ConstrainedBox
+        constraints={BoxConstraints.tightFor({
+          width: props.leadingWidth ?? _kLeadingWidth,
+        })}
+      >
+        {leading}
+      </ConstrainedBox>
+    );
+  }
+
+  const toolbar = (
+    <NavigationToolbar
+      leading={leading}
+      middle={title}
+      trailing={actions}
+      centerMiddle={effectiveCentered}
+      middleSpacing={props.titleSpacing
+        ?? appBarTheme.titleSpacing
+        ?? NavigationToolbar.kMiddleSpacing}
+    />
   );
 
-  if (props.leadingAction) {
-    title = <Padding padding={EdgeInsets.only({ left: 16 })}>{title}</Padding>;
-  }
-  if (effectiveCentered) {
-    title = <Center>{title}</Center>;
-  }
-
-  const hasIcons = !!props.leadingAction;
-
   return (
-    <Container
-      boxDecoration={BoxDecoration({
-        color: backgroundColor,
-      })}
-    >
-      <Padding padding={EdgeInsets.only({ top: insets.top })}>
-        <Container
+    <Container boxDecoration={BoxDecoration({ color: backgroundColor })}>
+      <SafeArea bottom={false}>
+        <ConstrainedBox
           constraints={BoxConstraints.expand({ height: toolbarHeight })}
-          alignment={AlignmentDirectional.centerStart}
         >
-          <IconTheme value={defaults.iconTheme!}>
-            <Row mainAxisSize={MainAxisSize.max}>
-              {hasIcons && (
-                <SizedBox
-                  width={defaults.iconTheme!.size}
-                  height={defaults.iconTheme!.size}
-                >
-                  {props.leadingAction}
-                </SizedBox>
-              )}
-              {title}
-              {
-                /*
-                 * FIXME: this is not a proper solution.. we need to figure out
-                 *  how to implement proper centering with the interference
-                 *  of side containers
-                 */
-              }
-              {hasIcons && (
-                <SizedBox
-                  width={defaults.iconTheme!.size}
-                  height={defaults.iconTheme!.size}
-                />
-              )}
-            </Row>
-          </IconTheme>
-        </Container>
-      </Padding>
+          {toolbar}
+        </ConstrainedBox>
+      </SafeArea>
     </Container>
   );
 };
