@@ -300,16 +300,15 @@ export class Typography {
     englishLike: TextTheme | undefined,
   ) {
     switch (platform) {
-      case 'android':
-        black ||= Typography.blackMountainView;
-        white ||= white || Typography.whiteMountainView;
-        break;
       case 'ios':
         black ||= Typography.blackCupertino;
         white ||= white || Typography.whiteCupertino;
         break;
+      case 'android':
       default:
-        throw `Platform not supported: ${platform}`;
+        black ||= Typography.blackMountainView;
+        white ||= white || Typography.whiteMountainView;
+        break;
     }
 
     return new Typography(platform, black!, white!, englishLike);
