@@ -26,6 +26,25 @@ export abstract class EdgeInsetsGeometry {
     );
   }
 
+  get top() {
+    return this._top;
+  }
+  get start() {
+    return this._start;
+  }
+  get left() {
+    return this._left;
+  }
+  get end() {
+    return this._end;
+  }
+  get right() {
+    return this._right;
+  }
+  get bottom() {
+    return this._bottom;
+  }
+
   protected constructor(
     protected _left: number,
     protected _right: number,
@@ -48,12 +67,12 @@ export abstract class EdgeInsetsGeometry {
 
   clamp(min: EdgeInsetsGeometry, max: EdgeInsetsGeometry): EdgeInsetsGeometry {
     return MixedEdgeInsets.fromLRSETB(
-      clampDouble(this._left, min._left, max._left),
-      clampDouble(this._right, min._right, max._right),
-      clampDouble(this._start, min._start, max._start),
-      clampDouble(this._end, min._end, max._end),
-      clampDouble(this._top, min._top, max._top),
-      clampDouble(this._bottom, min._bottom, max._bottom),
+      clampDouble(min._left, max._left, this._left),
+      clampDouble(min._right, max._right, this._right),
+      clampDouble(min._start, max._start, this._start),
+      clampDouble(min._end, max._end, this._end),
+      clampDouble(min._top, max._top, this._top),
+      clampDouble(min._bottom, max._bottom, this._bottom),
     );
   }
 
@@ -89,12 +108,12 @@ export abstract class EdgeInsetsGeometry {
 // to keep it as class
 export class EdgeInsets extends EdgeInsetsGeometry {
   private constructor(
-    public top: number,
-    public left: number,
-    public right: number,
-    public bottom: number,
+    _top: number,
+    _left: number,
+    _right: number,
+    _bottom: number,
   ) {
-    super(left, right, 0, 0, top, bottom);
+    super(_left, _right, 0, 0, _top, _bottom);
   }
 
   static zero = new EdgeInsets(0, 0, 0, 0);
