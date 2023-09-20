@@ -9,5 +9,6 @@ export * from './icon-theme-data';
 export * from './media-query';
 export * from './media-query-data';
 export * from './placeholder';
+export * from './safe-area';
 export * from './sized-box';
 export * from './text';
