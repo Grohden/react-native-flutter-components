@@ -30,14 +30,14 @@ export const VisualDensity = ({
     // assert(constraints.debugAssertIsValid());
     return constraints.copyWith({
       minWidth: clampDouble(
-        constraints.minWidth + this.baseSizeAdjustment.dx,
         0.0,
         constraints.maxWidth,
+        constraints.minWidth + this.baseSizeAdjustment.dx,
       ),
       minHeight: clampDouble(
-        constraints.minHeight + this.baseSizeAdjustment.dy,
         0.0,
         constraints.maxHeight,
+        constraints.minHeight + this.baseSizeAdjustment.dy,
       ),
     });
   },
