@@ -42,7 +42,7 @@ export const Basic: Story<StoryProps> = (arg) => {
     <Container
       constraints={BoxConstraints.expand()}
       boxDecoration={BoxDecoration({
-        color: Color('rgba(126,229,103,0.23)'),
+        color: Color('#7EE5673A'),
       })}
     >
       <Padding padding={insets}>

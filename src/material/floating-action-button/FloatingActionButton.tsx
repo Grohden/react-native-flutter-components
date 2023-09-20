@@ -64,7 +64,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
             >
               <Center>
                 <IconTheme
-                  value={IconThemeData({
+                  data={IconThemeData({
                     size: iconSize,
                     color: iconColor,
                   })}

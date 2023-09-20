@@ -1,10 +1,13 @@
 import {
   AppBar,
+  Brightness,
   Center,
+  Colors,
   ColorScheme,
   Column,
   EdgeInsets,
   FloatingActionButton,
+  IconButton,
   MaterialApp,
   MediaQueryData,
   Scaffold,
@@ -29,6 +32,8 @@ export default function CounterApp() {
 
 const AfterSafeArea = () => {
   const wrapperInsets = useSafeAreaInsets();
+  const [brightness, setBrightness] = useState(Brightness.light);
+
   const query = useMemo(
     () =>
       MediaQueryData({
@@ -39,30 +44,57 @@ const AfterSafeArea = () => {
 
   const { theme, darkTheme } = useMemo(() => ({
     theme: ThemeData.new({
-      colorScheme: ColorScheme.lightM3(),
+      colorScheme: ColorScheme.fromSeed({
+        brightness: Brightness.light,
+        seedColor: Colors.lime,
+      }),
     }),
     darkTheme: ThemeData.new({
-      colorScheme: ColorScheme.darkM3(),
+      colorScheme: ColorScheme.fromSeed({
+        brightness: Brightness.dark,
+        seedColor: Colors.lime,
+      }),
     }),
   }), []);
 
   return (
     <MaterialApp
+      brightness={brightness}
       mediaQuery={query}
       theme={theme}
       darkTheme={darkTheme}
-      home={<Home />}
+      home={
+        <Home
+          onSwitchTheme={() => {
+            setBrightness(value =>
+              value === Brightness.light ? Brightness.dark : Brightness.light
+            );
+          }}
+        />
+      }
     />
   );
 };
 
-const Home = () => {
+const Home = ({ onSwitchTheme }: { onSwitchTheme: () => void }) => {
   const theme = useTheme();
   const [count, setCount] = useState(0);
 
   const renderAppBar = () => (
-    <AppBar>
-      <Text>React Native Demo Home Page</Text>
+    <AppBar
+      leadingAction={
+        <IconButton onPress={onSwitchTheme}>
+          <Icon
+            name={theme.brightness === Brightness.light
+              ? 'wb-sunny'
+              : 'nightlight-round'}
+          />
+        </IconButton>
+      }
+    >
+      <Text>
+        Home Page
+      </Text>
     </AppBar>
   );
 
