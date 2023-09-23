@@ -1,10 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { Animated, Pressable } from 'react-native';
 import type { EasingFunction } from 'react-native';
+import { Animated, Pressable } from 'react-native';
 
+import {
+  MaterialState,
+  MaterialStateProperty,
+  MaterialStatesController,
+} from '@lib/material/material-state';
 import type { Color } from '@lib/std-ui';
-import { InkRipple } from './_InkRipple';
 import type { InkRippleProps } from './_InkRipple';
+import { InkRipple } from './_InkRipple';
 
 // Should we do as flutter? the base for Ink stuff is Material
 // FIXME: implement splash factories for ink wheel
@@ -14,14 +19,16 @@ export const InkWell = ({
   duration,
   easing,
   onPress,
+  statesController,
   children,
 }: React.PropsWithChildren<{
   role?: 'button';
   duration: number;
   easing: EasingFunction;
-  rippleColor: Color;
+  rippleColor: MaterialStateProperty<Color | undefined>;
   autofocus?: boolean;
   onPress?: () => void;
+  statesController: MaterialStatesController;
 }>) => {
   const rippleIds = useRef(0);
   const [ripples, setRipples] = useState<(InkRippleProps & { key: number })[]>(
@@ -38,6 +45,7 @@ export const InkWell = ({
     <Pressable
       role={role}
       onPressIn={(event) => {
+        statesController.update(MaterialState.pressed, true);
         const key = ++rippleIds.current;
         // FIXME: in flutter (material?) the inkwell animation
         //  is slower on hold, when released it accelerates
@@ -46,7 +54,7 @@ export const InkWell = ({
           key,
           duration,
           easing,
-          color: rippleColor,
+          color: rippleColor.resolve(statesController.value)!,
           faded: false,
           position: {
             x: event.nativeEvent.locationX,
@@ -61,6 +69,7 @@ export const InkWell = ({
         ]);
       }}
       onPressOut={() => {
+        statesController.update(MaterialState.pressed, false);
         setRipples((values) =>
           values.map((value) => ({ ...value!, faded: true }))
         );

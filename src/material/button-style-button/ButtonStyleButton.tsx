@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import React from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import type { ButtonStyle } from '@lib/material/button-style';
 import { kInkEasing } from '@lib/material/constants';
 import { InkWell } from '@lib/material/ink-well';
-import { MaterialState } from '@lib/material/material-state';
+import {
+  MaterialState,
+  MaterialStatesController,
+} from '@lib/material/material-state';
 import { MaterialStateProperty } from '@lib/material/material-state';
 import { EdgeInsets, EdgeInsetsGeometry } from '@lib/painting';
 import { BoxConstraints } from '@lib/rendering';
@@ -22,9 +25,6 @@ type GetProp<T> = (
   style: ButtonStyle | undefined,
 ) => T | undefined;
 
-// FIXME: implement material states controller
-const FIXME_IMPLEMENT_MATERIAL_CTRL = new Set<MaterialState>();
-
 export const ButtonStyleButton = ({
   style,
   themeStyle,
@@ -34,6 +34,7 @@ export const ButtonStyleButton = ({
   onLongPress,
   isSemanticButton = true,
   autofocus,
+  ...props
 }: {
   children: React.ReactChild;
   style?: ButtonStyle;
@@ -43,8 +44,37 @@ export const ButtonStyleButton = ({
   onLongPress?: () => void;
   isSemanticButton?: boolean;
   autofocus?: boolean;
+  statesController?: MaterialStatesController;
 }) => {
+  const [, forceRender] = useReducer(a => a + 1, 0);
+  const [internalController, setInternalController] = useState(
+    () => MaterialStatesController([]),
+  );
+  const statesController = props.statesController || internalController;
   const enabled = !onPress || !onLongPress;
+
+  // FIXME: need to review this one, might be leaking something
+  useEffect(() => {
+    if (!props.statesController) {
+      const internal = MaterialStatesController([]);
+
+      internal.update(MaterialState.disabled, !enabled);
+      internal.addListener(forceRender);
+
+      setInternalController(internal);
+
+      return () => {
+        internal.dispose();
+      };
+    } else {
+      props.statesController.update(MaterialState.disabled, !enabled);
+      props.statesController.addListener(forceRender);
+
+      return () => {
+        props.statesController!.removeListener(forceRender);
+      };
+    }
+  }, [enabled, props.statesController]);
 
   const effectiveValue = <T,>(getProperty: GetProp<T>) => {
     const widgetValue = getProperty(style);
@@ -55,7 +85,7 @@ export const ButtonStyleButton = ({
   };
 
   const resolve = <T,>(getProperty: GetProp<MaterialStateProperty<T>>) => {
-    return effectiveValue(getProperty)?.resolve(FIXME_IMPLEMENT_MATERIAL_CTRL);
+    return effectiveValue(getProperty)?.resolve(statesController.value);
   };
 
   // const resolvedElevation = resolve((style) => style?.elevation);
@@ -123,11 +153,12 @@ export const ButtonStyleButton = ({
   const result = (
     <ConstrainedBox constraints={effectiveConstraints}>
       <InkWell
+        statesController={statesController}
         onPress={onPress}
         duration={resolvedAnimationDuration!}
         autofocus={autofocus}
         easing={kInkEasing}
-        rippleColor={overlayColor.resolve(new Set())!}
+        rippleColor={overlayColor}
       >
         <IconTheme.merge
           data={IconThemeData({

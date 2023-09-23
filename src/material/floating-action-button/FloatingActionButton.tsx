@@ -1,8 +1,12 @@
-import React, { Children } from 'react';
+import React, { Children, useState } from 'react';
 
 import { Colors } from '@lib/material/colors';
 import { kInkEasing } from '@lib/material/constants';
 import { InkWell } from '@lib/material/ink-well';
+import {
+  MaterialStateProperty,
+  MaterialStatesController,
+} from '@lib/material/material-state';
 import { useTheme } from '@lib/material/theme';
 import {
   BorderRadius,
@@ -27,10 +31,11 @@ export const FloatingActionButton = ({ children, onPressed }: {
   // shape: TODO: use proper shape,
   children: React.ReactChild;
 }) => {
+  const [controller] = useState(() => MaterialStatesController([]));
   const { colorScheme } = useTheme();
   const primary = colorScheme.primary;
   const iconColor = colorScheme.onPrimaryContainer;
-  const rippleColor = primary.withOpacity(0.5);
+  const rippleColor = MaterialStateProperty.all(primary.withOpacity(0.5));
   const shadowDecoration = BoxDecoration({
     shadow: BoxShadow.elevated({
       color: Colors.black,
@@ -41,7 +46,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
   const effectiveContainerSize = 56;
 
   return (
-    <Padding padding={EdgeInsets.only({ left: 16, right: 16 })}>
+    <Padding padding={EdgeInsets.symmetric({ horizontal: 16 })}>
       <DecoratedBox
         boxDecoration={shadowDecoration}
       >
@@ -53,6 +58,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
           })}
         >
           <InkWell
+            statesController={controller}
             duration={600}
             easing={kInkEasing}
             rippleColor={rippleColor}
