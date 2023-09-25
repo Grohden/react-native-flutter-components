@@ -1,13 +1,18 @@
-import { clampDouble } from '@material/material-color-utilities';
 import type { ViewStyle } from 'react-native';
 
-export type EdgeInsetsSymmetric = { vertical?: number; horizontal?: number };
+import type { Double } from '@lib/std-ui';
+import { clampDouble } from '@material/material-color-utilities';
+
+export type EdgeInsetsSymmetric = {
+  vertical?: Double;
+  horizontal?: Double;
+};
 
 export type EdgeInsetsOnly = {
-  left?: number;
-  right?: number;
-  bottom?: number;
-  top?: number;
+  left?: Double;
+  right?: Double;
+  bottom?: Double;
+  top?: Double;
 };
 
 // To bypass circular declaration refs
@@ -46,12 +51,12 @@ export abstract class EdgeInsetsGeometry {
   }
 
   protected constructor(
-    protected _left: number,
-    protected _right: number,
-    protected _start: number,
-    protected _end: number,
-    protected _top: number,
-    protected _bottom: number,
+    protected _left: Double,
+    protected _right: Double,
+    protected _start: Double,
+    protected _end: Double,
+    protected _top: Double,
+    protected _bottom: Double,
   ) {}
 
   add(other: EdgeInsetsGeometry): EdgeInsetsGeometry {
@@ -108,39 +113,39 @@ export abstract class EdgeInsetsGeometry {
 // to keep it as class
 export class EdgeInsets extends EdgeInsetsGeometry {
   private constructor(
-    _top: number,
-    _left: number,
-    _right: number,
-    _bottom: number,
+    _top: Double,
+    _left: Double,
+    _right: Double,
+    _bottom: Double,
   ) {
     super(_left, _right, 0, 0, _top, _bottom);
   }
 
   static zero = new EdgeInsets(0, 0, 0, 0);
 
-  static fromLTRB(left: number, top: number, right: number, bottom: number) {
+  static fromLTRB(left: Double, top: Double, right: Double, bottom: Double) {
     return new EdgeInsets(top, left, right, bottom);
   }
 
   static only(values: EdgeInsetsOnly) {
     return new EdgeInsets(
-      values.top ?? 0,
-      values.left ?? 0,
-      values.right ?? 0,
-      values.bottom ?? 0,
+      values.top ?? 0.0,
+      values.left ?? 0.0,
+      values.right ?? 0.0,
+      values.bottom ?? 0.0,
     );
   }
 
   static symmetric(values: EdgeInsetsSymmetric) {
     return new EdgeInsets(
-      values.vertical ?? 0,
-      values.horizontal ?? 0,
-      values.horizontal ?? 0,
-      values.vertical ?? 0,
+      values.vertical ?? 0.0,
+      values.horizontal ?? 0.0,
+      values.horizontal ?? 0.0,
+      values.vertical ?? 0.0,
     );
   }
 
-  static all(value: number) {
+  static all(value: Double) {
     return new EdgeInsets(value, value, value, value);
   }
 
@@ -165,12 +170,12 @@ export class EdgeInsets extends EdgeInsetsGeometry {
 
 class MixedEdgeInsets extends EdgeInsetsGeometry {
   static fromLRSETB(
-    left: number,
-    right: number,
-    start: number,
-    end: number,
-    top: number,
-    bottom: number,
+    left: Double,
+    right: Double,
+    start: Double,
+    end: Double,
+    top: Double,
+    bottom: Double,
   ) {
     return new MixedEdgeInsets(left, right, start, end, top, bottom);
   }

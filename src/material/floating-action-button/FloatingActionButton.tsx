@@ -42,8 +42,8 @@ export const FloatingActionButton = ({ children, onPressed }: {
       depth: 6,
     }),
   });
-  const iconSize = 24;
-  const effectiveContainerSize = 56;
+  const iconSize = 24.0;
+  const effectiveContainerSize = 56.0;
 
   return (
     <Padding padding={EdgeInsets.symmetric({ horizontal: 16 })}>

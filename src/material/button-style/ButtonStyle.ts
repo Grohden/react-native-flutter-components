@@ -2,7 +2,7 @@ import type { MaterialStateProperty } from '@lib/material/material-state';
 import type { VisualDensity } from '@lib/material/theme-data';
 import type { AlignmentGeometry, BorderSide, TextStyle } from '@lib/painting';
 import { EdgeInsetsGeometry } from '@lib/painting';
-import type { Color, Size } from '@lib/std-ui';
+import type { Color, Double, Size } from '@lib/std-ui';
 
 type ButtonStyleProps = {
   textStyle?: MaterialStateProperty<TextStyle | undefined>;
@@ -17,7 +17,7 @@ type ButtonStyleProps = {
   fixedSize?: MaterialStateProperty<Size | undefined>;
   maximumSize?: MaterialStateProperty<Size | undefined>;
   iconColor?: MaterialStateProperty<Color | undefined>;
-  iconSize?: MaterialStateProperty<number | undefined>;
+  iconSize?: MaterialStateProperty<Double | undefined>;
   side?: MaterialStateProperty<BorderSide | undefined>;
   // this.shape,
   // this.mouseCursor,

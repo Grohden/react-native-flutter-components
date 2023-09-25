@@ -1,15 +1,15 @@
-import { Color } from '@lib/std-ui/color';
-import type { Shadow } from '@lib/std-ui/shadow';
+import type { Double, Shadow } from '@lib/std-ui';
+import { Color } from '@lib/std-ui';
 import { clampDouble } from '@material/material-color-utilities';
 
 type IconThemeDataProps = {
-  size?: number;
+  size?: Double;
   color?: Color;
-  fill?: number;
-  grade?: number;
-  opacity?: number;
-  opticalSize?: number;
-  weight?: number;
+  fill?: Double;
+  grade?: Double;
+  opacity?: Double;
+  opticalSize?: Double;
+  weight?: Double;
   shadows?: Shadow[];
 };
 

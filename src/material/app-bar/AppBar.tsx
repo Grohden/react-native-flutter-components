@@ -9,7 +9,7 @@ import { IconButtonThemeData } from '@lib/material/icon-button-theme-data';
 import { useTheme } from '@lib/material/theme';
 import { BoxDecoration, TextStyle } from '@lib/painting';
 import { BoxConstraints } from '@lib/rendering';
-import type { Color } from '@lib/std-ui';
+import type { Color, Double } from '@lib/std-ui';
 import {
   Center,
   ConstrainedBox,
@@ -33,11 +33,11 @@ const actions: any = [];
 // https://m3.material.io/components/top-app-bar/specs#14e23895-ac2e-40d8-b0f7-8d016c10a225
 export const AppBar = (props: {
   leadingAction?: React.ReactChild;
-  leadingWidth?: number;
+  leadingWidth?: Double;
   children?: React.ReactChild;
   centerTitle?: boolean;
-  titleSpacing?: number;
-  toolbarHeight?: number;
+  titleSpacing?: Double;
+  toolbarHeight?: Double;
   foregroundColor?: Color;
   titleTextStyle?: TextStyle;
   toolbarTextStyle?: TextStyle;

@@ -1,9 +1,11 @@
+import type { Double } from '@lib/std-ui';
+
 export class BorderRadius {
   private constructor(private value: number) {}
 
-  // For now we only support circular.
-  static circular(value: number) {
-    return new BorderRadius(value);
+  // For now, we only support circular.
+  static circular(radius: Double) {
+    return new BorderRadius(radius);
   }
 
   toStyle() {

@@ -1,15 +1,16 @@
 import type { ViewStyle } from 'react-native';
 
-import type { Color } from '@lib/std-ui';
+import type { Color, Double } from '@lib/std-ui';
 
+// FIXME: this is not the flutter API
 export class BoxShadow {
-  static elevated({ color, depth }: { color: Color; depth: number }) {
+  static elevated({ color, depth }: { color: Color; depth: Double }) {
     return new BoxShadow(color, depth);
   }
 
-  constructor(private color: Color, private depth: number) {}
+  constructor(private color: Color, private depth: Double) {}
 
-  private interpolate(i: number, a: number, b: number, a2: number, b2: number) {
+  private interpolate(i: Double, a: Double, b: Double, a2: Double, b2: Double) {
     return ((i - a) * (b2 - a2)) / (b - a) + a2;
   }
 

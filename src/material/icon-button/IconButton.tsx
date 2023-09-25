@@ -10,7 +10,7 @@ import {
   BorderSide,
   EdgeInsetsGeometry,
 } from '@lib/painting';
-import type { Color, Size } from '@lib/std-ui';
+import type { Color, Double, Size } from '@lib/std-ui';
 
 import { IconButtonM3 } from './_IconButtonM3';
 import { IconButtonVariant } from './_IconButtonVariant';
@@ -50,11 +50,11 @@ IconButton.styleFrom = (props: {
   highlightColor?: Color;
   shadowColor?: Color;
   surfaceTintColor?: Color;
-  elevation?: number;
+  elevation?: Double;
   minimumSize?: Size;
   fixedSize?: Size;
   maximumSize?: Size;
-  iconSize?: number;
+  iconSize?: Double;
   side?: BorderSide;
   // shape: OutlinedBorder | undefined,
   padding?: EdgeInsetsGeometry;

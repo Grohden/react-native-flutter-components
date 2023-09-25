@@ -1,12 +1,14 @@
 import type { ViewStyle } from 'react-native';
 
+import type { Double } from '@lib/std-ui';
+
 import { AlignmentGeometry } from './alignment-geometry';
 
-const TOP = -1;
-const BOTTOM = 1;
-const CENTER = 0;
-const START = -1;
-const END = 1;
+const TOP = -1.0;
+const BOTTOM = 1.0;
+const CENTER = 0.0;
+const START = -1.0;
+const END = 1.0;
 
 export class AlignmentDirectional extends AlignmentGeometry {
   static bottomCenter = new AlignmentDirectional(CENTER, BOTTOM);
@@ -28,7 +30,7 @@ export class AlignmentDirectional extends AlignmentGeometry {
   static topEnd = new AlignmentDirectional(END, TOP);
 
   // FIXME: We do not support proper coordinates here..
-  private constructor(private x: number, private y: number) {
+  private constructor(private x: Double, private y: Double) {
     super();
   }
 

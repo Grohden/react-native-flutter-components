@@ -23,7 +23,7 @@ export class Border {
   constructor(private values: BorderDefinition) {}
 
   static debug(color = Color('#FF0000FF')) {
-    return Border.all({ color, width: 1 });
+    return Border.all({ color, width: 1.0 });
   }
 
   static only(values: BorderDefinition) {

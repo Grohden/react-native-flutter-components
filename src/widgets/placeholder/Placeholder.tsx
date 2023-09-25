@@ -9,7 +9,7 @@ export const Placeholder = (props: { color?: Color }) => {
   const [size, setSize] = useState(Size.square(0));
   const effectiveColor = props.color || Color('red');
   const decoration = BoxDecoration({
-    border: Border.all({ color: effectiveColor, width: 1 }),
+    border: Border.all({ color: effectiveColor, width: 1.0 }),
   });
 
   const lineData = useMemo(() => {

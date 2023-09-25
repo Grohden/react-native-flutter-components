@@ -1,10 +1,12 @@
+import type { Double } from '@lib/std-ui/type-semantics';
+
 export type Offset = {
-  dx: number;
-  dy: number;
-  direction: number;
-  multiply: (operand: number) => Offset;
+  dx: Double;
+  dy: Double;
+  direction: Double;
+  multiply: (operand: Double) => Offset;
 };
-export const Offset = (dx: number, dy: number): Offset => ({
+export const Offset = (dx: Double, dy: Double): Offset => ({
   dx,
   dy,
   get direction() {
@@ -13,4 +15,4 @@ export const Offset = (dx: number, dy: number): Offset => ({
   multiply: (operand) => Offset(dx * operand, dy * operand),
 });
 
-Offset.zero = Offset(0, 0);
+Offset.zero = Offset(0.0, 0.0);

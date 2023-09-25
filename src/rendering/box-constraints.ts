@@ -2,11 +2,12 @@ import { clampDouble } from '@material/material-color-utilities';
 import type { ViewStyle } from 'react-native';
 
 import { Size } from '@lib/std-ui';
+import type { Double } from '@lib/std-ui';
 
-const finiteOrExpanded = (v: number) => (isFinite(v) ? v : ('100%' as const));
+const finiteOrExpanded = (v: Double) => (isFinite(v) ? v : ('100%' as const));
 
 export class BoxConstraints {
-  static expand(size?: { width?: number; height?: number }) {
+  static expand(size?: { width?: Double; height?: Double }) {
     return new BoxConstraints(
       size?.width ?? Infinity,
       size?.width ?? Infinity,
@@ -23,7 +24,7 @@ export class BoxConstraints {
     return new BoxConstraints(size.width, size.width, size.width, size.height);
   }
 
-  static tightFor({ width, height }: { width?: number; height?: number }) {
+  static tightFor({ width, height }: { width?: Double; height?: Double }) {
     return new BoxConstraints(
       width ?? 0.0,
       width ?? Infinity,
@@ -33,10 +34,10 @@ export class BoxConstraints {
   }
 
   static new(constraints: {
-    minWidth?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
+    minWidth?: Double;
+    maxWidth?: Double;
+    minHeight?: Double;
+    maxHeight?: Double;
   }) {
     return new BoxConstraints(
       constraints.minWidth,
@@ -47,9 +48,9 @@ export class BoxConstraints {
   }
 
   private constructor(
-    public readonly minWidth = 0,
+    public readonly minWidth = 0.0,
     public readonly maxWidth = Infinity,
-    public readonly minHeight = 0,
+    public readonly minHeight = 0.0,
     public readonly maxHeight = Infinity,
   ) {}
 
@@ -87,10 +88,10 @@ export class BoxConstraints {
   }
 
   copyWith(props: {
-    minWidth?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    maxHeight?: number;
+    minWidth?: Double;
+    maxWidth?: Double;
+    minHeight?: Double;
+    maxHeight?: Double;
   }): BoxConstraints {
     return new BoxConstraints(
       props.minWidth ?? this.minWidth,
@@ -100,11 +101,11 @@ export class BoxConstraints {
     );
   }
 
-  constrainHeight(height = Infinity): number {
+  constrainHeight(height = Infinity): Double {
     return clampDouble(this.minHeight, this.maxHeight, height);
   }
 
-  constrainWidth(width = Infinity): number {
+  constrainWidth(width = Infinity): Double {
     return clampDouble(this.minWidth, this.maxWidth, width);
   }
 

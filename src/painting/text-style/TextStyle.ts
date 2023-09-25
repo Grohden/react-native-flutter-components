@@ -1,6 +1,6 @@
 import type { TextStyle as RNTextStyle } from 'react-native';
 
-import type { Color } from '@lib/std-ui';
+import type { Color, Double } from '@lib/std-ui';
 
 export type TextStyleProps = {
   color?: Color;
@@ -22,12 +22,12 @@ export type TextStyle = TextStyleProps & {
     decoration?: RNTextStyle['textDecorationLine'];
     decorationColor?: Color;
     decorationStyle?: RNTextStyle['textDecorationStyle'];
-    fontSizeFactor?: number;
-    fontSizeDelta?: number;
-    letterSpacingFactor?: number;
-    letterSpacingDelta?: number;
-    heightFactor?: number;
-    heightDelta?: number;
+    fontSizeFactor?: Double;
+    fontSizeDelta?: Double;
+    letterSpacingFactor?: Double;
+    letterSpacingDelta?: Double;
+    heightFactor?: Double;
+    heightDelta?: Double;
   }) => TextStyle;
   copyWith: (other: Partial<TextStyleProps>) => TextStyle;
   toStyle: () => RNTextStyle;

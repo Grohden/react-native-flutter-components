@@ -1,16 +1,17 @@
 import { EdgeInsets, EdgeInsetsGeometry } from '@lib/painting';
 import { Size } from '@lib/std-ui';
+import type { Double } from '@lib/std-ui';
 
 type MediaQueryDataProps = {
   size?: Size;
   padding?: EdgeInsetsGeometry;
-  textScaleFactor?: number;
+  textScaleFactor?: Double;
 };
 
 export type MediaQueryData = {
   size: Size;
   padding: EdgeInsetsGeometry;
-  textScaleFactor: number;
+  textScaleFactor: Double;
   copyWith(other: MediaQueryDataProps): MediaQueryData;
 };
 
