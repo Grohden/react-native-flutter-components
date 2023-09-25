@@ -1,4 +1,4 @@
-import type { TextStyle } from '@lib/painting';
+import type { ShapeBorder, TextStyle } from '@lib/painting';
 import type { Color, Double } from '@lib/std-ui';
 import type { IconThemeData } from '@lib/widgets';
 
@@ -10,7 +10,7 @@ type AppBarThemeValues = {
   scrolledUnderElevation?: Double;
   shadowColor?: Color;
   surfaceTintColor?: Color;
-  // ShapeBorder? shape,
+  shape?: ShapeBorder;
   iconTheme?: IconThemeData;
   actionsIconTheme?: IconThemeData;
   centerTitle?: boolean;

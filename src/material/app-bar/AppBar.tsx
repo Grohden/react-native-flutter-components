@@ -3,10 +3,13 @@ import React, { useMemo } from 'react';
 import { useAppBarTheme } from '@lib/material/app-bar-theme';
 import { kToolbarHeight } from '@lib/material/constants';
 import { IconButton } from '@lib/material/icon-button';
-import { IconButtonTheme } from '@lib/material/icon-button-theme';
-import { useIconButtonTheme } from '@lib/material/icon-button-theme';
+import {
+  IconButtonTheme,
+  useIconButtonTheme,
+} from '@lib/material/icon-button-theme';
 import { IconButtonThemeData } from '@lib/material/icon-button-theme-data';
 import { useTheme } from '@lib/material/theme';
+import type { ShapeBorder } from '@lib/painting';
 import { BoxDecoration, TextStyle } from '@lib/painting';
 import { BoxConstraints } from '@lib/rendering';
 import type { Color, Double } from '@lib/std-ui';
@@ -34,6 +37,7 @@ const actions: any = [];
 export const AppBar = (props: {
   leadingAction?: React.ReactChild;
   leadingWidth?: Double;
+  shape?: ShapeBorder;
   children?: React.ReactChild;
   centerTitle?: boolean;
   titleSpacing?: Double;
