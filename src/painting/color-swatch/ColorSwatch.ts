@@ -1,10 +1,9 @@
 import { Color } from '@lib/std-ui';
 
-type ColorSwatch = Color & {
+export type ColorSwatch = Color & {
   at: (idx: number) => Color | undefined;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ColorSwatch = (
   color: string,
   swatch: Record<number, Color>,
