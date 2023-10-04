@@ -3,4 +3,5 @@
 export * from './border';
 export * from './border-radius';
 export * from './border-side';
+export * from './border-style';
 export * from './shape-border';
