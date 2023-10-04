@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { MediaQueryData } from '@lib/widgets/media-query-data';
 
@@ -24,6 +24,6 @@ export const MediaQuery = (
   },
 ) => (
   <Context.Provider value={data}>
-    {Children.only(children)}
+    {children}
   </Context.Provider>
 );

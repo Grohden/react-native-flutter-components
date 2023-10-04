@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
@@ -16,7 +16,8 @@ export const Container = ({
   constraints,
   clipsChildren,
   alignment,
-}: React.PropsWithChildren<{
+}: {
+  children: React.ReactChild;
   boxDecoration?: BoxDecoration;
   padding?: EdgeInsetsGeometry;
   alignment?: AlignmentGeometry;
@@ -24,7 +25,7 @@ export const Container = ({
   // FIXME: maybe its better to make this a component, but its usually a practice to
   //  clip children when using radius, so for now it makes sense
   clipsChildren?: boolean;
-}>) => {
+}) => {
   // For POTENTIAL perf improvements I've decided to put all styles in Container
   //  and make other components merely an alias for Container.
   //  It might be worth to investigate how flutter handles all that nesting it does
@@ -37,5 +38,5 @@ export const Container = ({
     overflow: clipsChildren ? 'hidden' : undefined,
   };
 
-  return <View style={style}>{Children.only(children)}</View>;
+  return <View style={style}>{children}</View>;
 };

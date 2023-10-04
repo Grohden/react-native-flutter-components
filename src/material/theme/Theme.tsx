@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { AppBarTheme } from '@lib/material/app-bar-theme';
 import { IconButtonTheme } from '@lib/material/icon-button-theme';
@@ -26,7 +26,7 @@ export const Theme = (
     children: React.ReactChild;
   },
 ) => {
-  let root = Children.only(children);
+  let root = children;
   root = (
     <DefaultTextStyle value={{ style: themeData.textTheme.bodySmall! }}>
       {root}

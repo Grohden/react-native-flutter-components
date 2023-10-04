@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import type { ViewStyle } from 'react-native';
 import { View } from 'react-native';
 
@@ -37,7 +37,7 @@ export const SafeArea = (
 
   return (
     <View style={styles}>
-      {Children.only(children)}
+      {children}
     </View>
   );
 };

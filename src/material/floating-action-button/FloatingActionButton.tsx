@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Colors } from '@lib/material/colors';
 import { kInkEasing } from '@lib/material/constants';
@@ -75,7 +75,7 @@ export const FloatingActionButton = ({ children, onPressed }: {
                     color: iconColor,
                   })}
                 >
-                  {Children.only(children)}
+                  {children}
                 </IconTheme>
               </Center>
             </SizedBox>

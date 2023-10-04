@@ -1,4 +1,4 @@
-import React, { Children, createContext, useContext } from 'react';
+import React, { createContext, useContext } from 'react';
 
 import { AppBarThemeData } from '@lib/material/app-bar-theme-data';
 
@@ -24,6 +24,6 @@ export const AppBarTheme = (
   },
 ) => (
   <Context.Provider value={themeData}>
-    {Children.only(children)}
+    {children}
   </Context.Provider>
 );

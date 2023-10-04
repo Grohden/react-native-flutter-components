@@ -1,10 +1,10 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export const Center = (props: { children?: React.ReactChild }) => (
   <View style={styles.centerRow}>
     <View style={styles.centerCol}>
-      {Children.only(props.children)}
+      {props.children}
     </View>
   </View>
 );

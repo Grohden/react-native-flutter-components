@@ -1,5 +1,5 @@
 import type { ReactChild } from 'react';
-import React, { Children } from 'react';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { useTheme } from '@lib/material/theme';
@@ -18,13 +18,12 @@ export const Scaffold = (props: {
         backgroundColor: theme.colorScheme.background.hex(),
       }]}
     >
-      {props.appBar && Children.only(props.appBar)}
-      {Children.only(props.children)}
-
+      {props.appBar}
+      {props.children}
       {props.floatingActionButton && (
         <View style={styles.fab}>
           <SafeArea top>
-            {Children.only(props.floatingActionButton)}
+            {props.floatingActionButton}
           </SafeArea>
         </View>
       )}
