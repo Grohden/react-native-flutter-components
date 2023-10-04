@@ -3,23 +3,22 @@ import {
   Brightness,
   Center,
   Colors,
-  ColorScheme,
   Column,
-  EdgeInsets,
   FloatingActionButton,
   IconButton,
   MaterialApp,
-  MediaQueryData,
   Scaffold,
   Text,
-  ThemeData,
   useTheme,
 } from '@grohden/react-native-flutter-components';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+  useSafeAreaMediaQuery,
+  useSeedColors,
+  useToggleBrightness,
+} from './hooks';
 import { Icon } from './implementations';
 
 export default function CounterApp() {
@@ -31,31 +30,9 @@ export default function CounterApp() {
 }
 
 const AfterSafeArea = () => {
-  const wrapperInsets = useSafeAreaInsets();
-  const [brightness, setBrightness] = useState(Brightness.light);
-
-  const query = useMemo(
-    () =>
-      MediaQueryData({
-        padding: EdgeInsets.only(wrapperInsets),
-      }),
-    [wrapperInsets],
-  );
-
-  const { theme, darkTheme } = useMemo(() => ({
-    theme: ThemeData.new({
-      colorScheme: ColorScheme.fromSeed({
-        brightness: Brightness.light,
-        seedColor: Colors.lime,
-      }),
-    }),
-    darkTheme: ThemeData.new({
-      colorScheme: ColorScheme.fromSeed({
-        brightness: Brightness.dark,
-        seedColor: Colors.lime,
-      }),
-    }),
-  }), []);
+  const query = useSafeAreaMediaQuery();
+  const [brightness, toggleBrightness] = useToggleBrightness();
+  const { theme, darkTheme } = useSeedColors(Colors.lime);
 
   return (
     <MaterialApp
@@ -63,15 +40,7 @@ const AfterSafeArea = () => {
       mediaQuery={query}
       theme={theme}
       darkTheme={darkTheme}
-      home={
-        <Home
-          onSwitchTheme={() => {
-            setBrightness(value =>
-              value === Brightness.light ? Brightness.dark : Brightness.light
-            );
-          }}
-        />
-      }
+      home={<Home onSwitchTheme={toggleBrightness} />}
     />
   );
 };
